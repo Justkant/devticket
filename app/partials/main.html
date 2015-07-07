@@ -1,0 +1,25 @@
+<md-sidenav flex
+  data-ng-include="'partials/sidenav.html'"
+  class="md-sidenav-left"
+  data-md-component-id="left"
+  data-md-is-locked-open="$mdMedia('gt-md')"
+  data-ng-controller="SidenavCtrl as vm"
+  layout="column"
+  layout-fill>
+</md-sidenav>
+<div flex
+  layout="column">
+  <md-content flex
+    data-ui-view
+    data-autoscroll
+    data-md-scroll-y
+    layout="row"
+    layout-padding
+    class="main-content">
+      <h2>Liste des groupes</h2>
+  </md-content>
+</div>
+<md-fab-speed-dial data-ng-include="'partials/fab.html'"
+  class="fab md-scale"
+  data-md-direction="up"
+  data-ng-controller="FabCtrl as vm"></md-fab-speed-dial>

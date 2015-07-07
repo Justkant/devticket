@@ -1,0 +1,92 @@
+$accent-color: #dd0cb4;
+$accent-color-darker: #c20b9e;
+$grey: #ececec;
+$soft-grey: #f6f6f6;
+$dark-grey: #606060;
+.main-content {
+  padding-right: 100px;
+}
+
+.nav-header {
+  flex-shrink: 0;
+  a.logo {
+    text-align     : center;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    padding        : 0 0 16px;
+    margin         : 0 auto;
+    text-decoration: none;
+    img {
+      height          : 150px;
+      width           : auto;
+      display         : block;
+      transform-origin: 50% 0;
+      transform       : scale(1.2);
+    }
+    
+    h1 {
+      color      : black;
+      text-align : center;
+      font-weight: 400;
+      font-size  : 26px;
+    }
+  }
+}
+
+.fab {
+  position: fixed;
+  bottom  : 20px;
+  right   : 20px;
+  
+  .md-fab.accent {
+    background-color: $accent-color;
+  }
+  
+  .md-fab.accent:not([disabled]):hover {
+    background-color: $accent-color-darker;
+  }
+}
+
+.toolbar-selector {
+  padding-left: 20px;
+}
+
+md-sidenav {
+  background: $grey;
+}
+
+md-toolbar.grey {
+  background: $soft-grey;
+  * {
+    color: black;
+  }
+}
+
+md-icon.md-dark {
+  color: $dark-grey !important;
+}
+
+table[md-data-table][md-row-select]>tbody>tr>td:nth-child(n+3):nth-last-child(n+2),
+table[md-data-table][md-row-select]>tfoot>tr>td:nth-child(n+3):nth-last-child(n+2),
+table[md-data-table][md-row-select]>thead>tr>th:nth-child(n+3):nth-last-child(n+2) {
+  padding: 0;
+}
+
+table[md-data-table][md-row-select]>tbody>tr>td:nth-child(2),
+table[md-data-table][md-row-select]>tfoot>tr>td:nth-child(2),
+table[md-data-table][md-row-select]>thead>tr>th:nth-child(2) {
+  padding: 0;
+}
+
+table[md-data-table][md-row-select]>tbody>tr>td:first-child,
+table[md-data-table][md-row-select]>tfoot>tr>td:first-child,
+table[md-data-table][md-row-select]>thead>tr>th:first-child {
+  padding: 0 10px;
+}
+
+table[md-data-table]:not([md-row-select])>tbody>tr>td:nth-child(n+2):nth-last-child(n+2),
+table[md-data-table]:not([md-row-select])>tfoot>tr>td:nth-child(n+2):nth-last-child(n+2),
+table[md-data-table]:not([md-row-select])>thead>tr>th:nth-child(n+2):nth-last-child(n+2) {
+  padding: 0;
+}

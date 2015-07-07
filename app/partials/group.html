@@ -1,0 +1,67 @@
+<div flex
+  layout="row"
+  layout-align="start start">
+  <md-card>
+    <md-data-table-toolbar>
+      <md-select class="toolbar-selector"
+        ng-model="vm.filter"
+        aria-label="select filter">
+        <md-option ng-repeat="filter in vm.filters"
+          value="{{filter}}">
+          {{filter}}
+        </md-option>
+      </md-select>
+    </md-data-table-toolbar>
+
+    <md-data-table-container>
+      <table md-data-table>
+        <thead md-order="vm.query.order">
+          <tr>
+            <th order-by="id">#</th>
+            <th order-by="user.name">Nom</th>
+            <th order-by="subject">Sujet</th>
+            <th order-by="priority">Priorité</th>
+            <th order-by="vente">Avant/Après Vente</th>
+            <th order-by="categorie">Catégorie</th>
+            <th order-by="subcategorie">Sous-Catégorie</th>
+            <th order-by="commandNb">No. de Commande</th>
+            <th order-by="venteNb">No. de Vente</th>
+            <th order-by="refSRP">Ref. SRP</th>
+            <th order-by="created">Date de Création</th>
+            <th order-by="status">Statut</th>
+            <th order-by="ventePrice">+1500€</th>
+            <th order-by="lastReponse">Dernière Réponse Par</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)">
+            <td>{{ticket.id}}</td>
+            <td>{{ticket.user.name}}</td>
+            <td>{{ticket.subject}}</td>
+            <td>{{ticket.priority}}</td>
+            <td>{{ticket.vente}}</td>
+            <td>{{ticket.categorie}}</td>
+            <td>{{ticket.subcategorie}}</td>
+            <td>{{ticket.commandNb}}</td>
+            <td>{{ticket.venteNb}}</td>
+            <td>{{ticket.refSRP}}</td>
+            <td>{{ticket.created}}</td>
+            <td>{{ticket.status}}</td>
+            <td>{{ticket.ventePrice}}</td>
+            <td>{{ticket.lastReponse}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-data-table-container>
+
+    <md-data-table-toolbar layout-align="end"
+      fix-bottom
+      update-func="vm">
+      <md-data-table-pagination md-label="vm.label"
+        md-limit="vm.query.limit"
+        md-page="vm.query.page"
+        md-row-select="vm.query.rowSelect"
+        md-total="{{vm.tickets.length}}"></md-data-table-pagination>
+    </md-data-table-toolbar>
+  </md-card>
+</div>
