@@ -1,8 +1,20 @@
-<md-dialog>
-  <md-dialog-content>
-    <h1>Yo</h1>
-  </md-dialog-content>
-  <div class="md-actions">
-    <md-button data-ng-click="vm.hide(vm.ticket)">Valider</md-button>
-  </div>
+<md-dialog flex="50">
+    <form name="ticketForm" data-ng-submit="vm.hide(vm.ticket)">
+        <md-dialog-content>
+            <md-input-container flex>
+                <label>Sujet</label>
+                <input ng-model="vm.ticket.subject" type="text" required />
+            </md-input-container>
+            <md-input-container flex>
+                <label>Description</label>
+                <textarea ng-model="vm.ticket.description" type="text"
+                          columns="1" md-maxlength="300" required></textarea>
+            </md-input-container>
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button type="button" data-ng-click="vm.cancel()">Fermer</md-button>
+            <md-button class="md-raised md-primary" type="submit"
+                       data-ng-disabled="ticketForm.$invalid">Créer</md-button>
+        </div>
+    </form>
 </md-dialog>
