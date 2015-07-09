@@ -5,7 +5,7 @@ var del = require('del');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('styles', function () {
+gulp.task('styles', function() {
   return gulp.src('app/styles/**/*.scss')
     .pipe($.newer('.tmp/styles'))
     .pipe($.clipEmptyFiles())
@@ -19,16 +19,18 @@ gulp.task('styles', function () {
     .pipe($.size());
 });
 
-gulp.task('scripts', function () {
+gulp.task('scripts', function() {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.newer('app/scripts/'))
+    .pipe($.plumber())
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
 });
 
-gulp.task('inject', ['wiredep', 'styles', 'scripts'], function () {
+gulp.task('inject', ['wiredep', 'styles', 'scripts'], function() {
   return gulp.src('app/index.html')
+    .pipe($.plumber())
     .pipe($.inject(gulp.src('app/scripts/**/*.js').pipe($.angularFilesort()), {
       addRootSlash: false,
       ignorePath: 'app'

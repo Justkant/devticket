@@ -1,25 +1,85 @@
 <md-sidenav flex
-  data-ng-include="'partials/sidenav.html'"
   class="md-sidenav-left"
   data-md-component-id="left"
   data-md-is-locked-open="$mdMedia('gt-md')"
-  data-ng-controller="SidenavCtrl as vm"
   layout="column"
   layout-fill>
+  <header class="nav-header">
+    <a href="#/"
+      class="logo">
+      <img src="images/logo.png"
+        alt="" />
+      <h1>Working Room</h1>
+    </a>
+  </header>
+  <md-list layout="column"
+    layout-align="start center">
+    <md-list-item>
+      <h3>Modules</h3>
+    </md-list-item>
+    <md-list-item data-ng-repeat="module in vm.modules">
+      <md-button class="md-primary"
+        data-ui-sref="main.group">{{module.name}}</md-button>
+    </md-list-item>
+  </md-list>
+  <div flex>
+  </div>
+  <md-list layout="column"
+    layout-align="end center">
+    <md-list-item>
+      <md-button class="md-primary"
+        data-ui-sref="main.profile">Profile</md-button>
+    </md-list-item>
+    <md-list-item>
+      <md-button class="md-primary"
+        data-ui-sref="main.admin">Administration</md-button>
+    </md-list-item>
+    <md-list-item>
+      <md-button class="md-primary"
+        data-ng-click="vm.unauth()">Déconnexion</md-button>
+    </md-list-item>
+  </md-list>
 </md-sidenav>
 <div flex
   layout="column">
+  <md-toolbar class="grey md-whiteframe-z2" layout="row">
+    <div class="toolbar-title">
+      <h3>Modules</h3>
+    </div>
+    <div flex></div>
+    <md-button class="md-primary" data-ng-click="vm.openCreateTicket($event)">
+      Créer un ticket
+    </md-button>
+  </md-toolbar>
   <md-content flex
     data-ui-view
     data-autoscroll
     data-md-scroll-y
-    layout="row"
+    layout="column"
     layout-padding
     class="main-content">
-      <h2>Liste des groupes</h2>
+    <h2>Liste des modules</h2>
   </md-content>
 </div>
-<md-fab-speed-dial data-ng-include="'partials/fab.html'"
-  class="fab md-scale"
-  data-md-direction="up"
-  data-ng-controller="FabCtrl as vm"></md-fab-speed-dial>
+<!--<md-fab-speed-dial class="fab md-scale"
+  data-md-direction="up">
+  <md-fab-trigger>
+    <md-button aria-label="add"
+      data-ng-click="vm.openCreateTicket($event)"
+      class="md-fab accent">
+      <md-tooltip data-md-direction="left">
+        Créer un ticket
+      </md-tooltip>
+      <md-icon>add</md-icon>
+    </md-button>
+  </md-fab-trigger>
+  <md-fab-actions>
+    <md-button aria-label="settings"
+      class="md-fab md-raised md-mini">
+      <md-tooltip data-md-direction="left">
+        Paramètres du groupe
+      </md-tooltip>
+      <md-icon style="color: #5c5c5c">settings</md-icon>
+    </md-button>
+  </md-fab-actions>
+</md-fab-speed-dial>-->

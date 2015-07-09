@@ -19,7 +19,6 @@ angular.module('workingRoom')
       }, {
         rememberMe: true
       }).then(function () {
-        console.log('goo');
         $state.go('main');
       }, function (error) {
         console.log(error);

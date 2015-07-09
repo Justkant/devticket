@@ -42,24 +42,24 @@
   </head>
 
   <body layout="row">
-    <div class="loader-container ng-cloak">
-      <div>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-        <span class="dots"></span>
-      </div>
-    </div>
     <div flex
       layout="row"
-      data-ui-view
-      data-ng-cloak></div>
+      data-ui-view>
+      <div class="loader-container">
+        <div>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+        </div>
+      </div>
+    </div>
     <!-- build:js(app) scripts/vendor.min.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -80,18 +80,18 @@
     <!-- build:js(app) scripts/main.min.js -->
     <!-- inject:js -->
     <script src="scripts/workingRoom.js"></script>
-    <script src="scripts/shared/services/user.js"></script>
+    <script src="scripts/shared/services/users.js"></script>
+    <script src="scripts/shared/services/groups.js"></script>
     <script src="scripts/shared/directives/fix-bottom.js"></script>
-    <script src="scripts/shared/controllers/sidenav-ctrl.js"></script>
-    <script src="scripts/shared/controllers/fab-ctrl.js"></script>
     <script src="scripts/shared/controllers/create-ticket-ctrl.js"></script>
     <script src="scripts/profile/profile-ctrl.js"></script>
-    <script src="scripts/login/login-ctrl.js"></script>
     <script src="scripts/main/main-ctrl.js"></script>
+    <script src="scripts/login/login-ctrl.js"></script>
     <script src="scripts/group/group-ctrl.js"></script>
     <script src="scripts/firebase/ref.js"></script>
     <script src="scripts/firebase/config.js"></script>
     <script src="scripts/firebase/auth.js"></script>
+    <script src="scripts/admin/admin-ctrl.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 

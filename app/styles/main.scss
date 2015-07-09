@@ -58,6 +58,11 @@ md-sidenav {
 
 md-toolbar.grey {
   background: $soft-grey;
+  
+  .toolbar-title {
+    margin-left: 30px;
+  }
+  
   * {
     color: black;
   }
