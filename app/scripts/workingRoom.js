@@ -10,7 +10,7 @@ angular.module('workingRoom', [
   'ngMaterial',
   'ui.router',
   'md.data.table'
-]).config(function($stateProvider, $urlRouterProvider, $mdIconProvider) {
+]).config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('login', {
