@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('workingRoom')
-  .controller('GroupCtrl', function ($scope) {
+  .controller('ModulesCtrl', function($scope, TicketsList, Tickets, $stateParams, $mdDialog) {
     var vm = this;
-    //var ref = new Firebase('https://devticket.firebaseio.com/');
+
+    vm.openCreateTicket = openCreateTicket;
+    vm.openTicketView = openTicketView;
 
     vm.filter = 'Tickets à traiter';
     vm.filters = [
@@ -25,20 +27,7 @@ angular.module('workingRoom')
       rowSelect: [10, 20, 50, 100, 200, 500]
     };
 
-    var ticket = {
-      user: {
-        name: 'Raphael'
-      },
-      subject: 'test',
-      priority: 'high',
-      vente: 'Avant vente',
-      categorie: 'Vétement',
-      subcategorie: 'T-shirt',
-      created: '04/06/15',
-      status: 'A traiter',
-      ventePrice: 'non',
-      lastReponse: 'Raphael 10/06/15'
-    };
+    vm.tickets = TicketsList;
 
     function Ticket(obj, i) {
       this.id = i; //Math.round(Math.random() * 1000) + 1;
@@ -57,8 +46,30 @@ angular.module('workingRoom')
       this.lastReponse = obj.lastReponse;
     }
 
-    vm.tickets = [];
-    for (var i = 0; i < 1000; i++) {
-      vm.tickets.push(new Ticket(ticket, i + 1));
+    function openTicketView(event, id) {
+      $mdDialog.show({
+        controller: 'ViewTicketCtrl as vm',
+        templateUrl: 'partials/view-ticket-modal.html',
+        targetEvent: event,
+        resolve: {
+          ticket: function(Tickets) {
+            return Tickets.getTicket($stateParams.id, id);
+          }
+        }
+      }).then(function(res) {
+        console.log(res);
+      });
+    }
+
+    function openCreateTicket(event) {
+      $mdDialog.show({
+        controller: 'CreateTicketCtrl as vm',
+        templateUrl: 'partials/create-ticket-modal.html',
+        targetEvent: event
+      }).then(function(res) {
+        Tickets.add($stateParams.id, res);
+      }, function(err) {
+        console.log(err);
+      });
     }
   });

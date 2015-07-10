@@ -49,7 +49,7 @@ angular.module('workingRoom')
       },
       destroy: function() {
         destroyIfExist();
-        if (users) {
+        if (groups) {
           groups.$destroy();
           groups = null;
         }

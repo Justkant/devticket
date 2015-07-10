@@ -35,13 +35,21 @@ angular.module('workingRoom', [
               reject('AUTH_REQUIRED');
             });
           })
+        },
+        ModulesList: function(Modules) {
+          return Modules.all().$loaded();
         }
       }
     })
-    .state('main.group', {
-      url: 'group/:id',
-      templateUrl: 'partials/group.html',
-      controller: 'GroupCtrl as vm'
+    .state('main.modules', {
+      url: 'modules/:id',
+      templateUrl: 'partials/modules.html',
+      controller: 'ModulesCtrl as vm',
+      resolve: {
+        TicketsList: function(Tickets, $stateParams) {
+          return Tickets.get($stateParams.id);
+        }
+      }
     })
     .state('main.profile', {
       url: 'profile/:id',

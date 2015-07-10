@@ -11,6 +11,12 @@
           {{filter}}
         </md-option>
       </md-select>
+      <div flex>
+      </div>
+      <md-button class="md-primary"
+        data-ng-click="vm.openCreateTicket($event)">
+        Créer un ticket
+      </md-button>
     </md-data-table-toolbar>
 
     <md-data-table-container>
@@ -34,8 +40,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)">
-            <td>{{ticket.id}}</td>
+          <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
+          data-ng-click="vm.openTicketView($event, ticket.$id)">
+            <td>{{ticket.$id}}</td>
             <td>{{ticket.user.name}}</td>
             <td>{{ticket.subject}}</td>
             <td>{{ticket.priority}}</td>

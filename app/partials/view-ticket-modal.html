@@ -1,0 +1,20 @@
+<md-dialog flex="50">
+  <md-dialog-content layout="column">
+    <div flex>
+      <h4>Sujet :</h4>
+      <p>
+        {{ vm.ticket.subject }}
+      </p>
+    </div>
+  <div flex>
+    <h4>Description :</h4>
+    <p>
+      {{ vm.ticket.description }}
+    </p>
+  </div>
+  </md-dialog-content>
+  <div class="md-actions">
+    <md-button type="button"
+      data-ng-click="vm.cancel()">Fermer</md-button>
+  </div>
+</md-dialog>
