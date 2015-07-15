@@ -3,6 +3,7 @@ $accent-color-darker: #c20b9e;
 $grey: #ececec;
 $soft-grey: #f6f6f6;
 $dark-grey: #606060;
+
 .main-content {
   padding-right: 100px;
 }
@@ -53,18 +54,46 @@ $dark-grey: #606060;
 }
 
 md-sidenav {
-  background: $grey;
+  border-right: 1px solid $grey;
+  
+  .divider {
+    height    : 1px;
+    border-top: 1px solid $grey;
+  }
+  
+  md-list md-list-item a {
+    width         : 100%;
+    text-align    : justify !important;
+    color         : $accent-color !important;
+    margin        : 0 !important;
+    padding       : 5px 20px !important;
+    border-radius : 0 !important;
+    font-weight   : normal !important;
+    text-transform: none !important;
+    
+    md-icon {
+      margin-right: 20px;
+    }
+    
+    &.active {
+      background: $soft-grey;
+    }
+    
+    &.black {
+      color: black !important;
+    }
+  }
 }
 
-md-toolbar.grey {
-  background: $soft-grey;
+md-toolbar {
+  background: $accent-color;
   
   .toolbar-title {
     margin-left: 30px;
-  }
-  
-  * {
-    color: black;
+    
+    h3 {
+      font-weight: normal !important;
+    }
   }
 }
 

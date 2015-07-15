@@ -46,8 +46,11 @@ angular.module('workingRoom', [
       templateUrl: 'partials/modules.html',
       controller: 'ModulesCtrl as vm',
       resolve: {
-        TicketsList: function(Tickets, $stateParams) {
-          return Tickets.get($stateParams.id);
+        moduleId: function($stateParams) {
+          return $stateParams.id;
+        },
+        TicketsList: function(Tickets, moduleId) {
+          return Tickets.get(moduleId);
         }
       }
     })
@@ -59,7 +62,17 @@ angular.module('workingRoom', [
     .state('main.admin', {
       url: 'admin',
       templateUrl: 'partials/admin.html',
-      controller: 'AdminCtrl as vm'
+      controller: 'AdminCtrl as vm',
+      resolve: {
+        ModulesList: function(ModulesList) {
+          return ModulesList;
+        }
+      }
+    })
+    .state('main.admin.modules', {
+      url: '/modules/:id',
+      templateUrl: 'partials/admin-modules.html',
+      controller: 'AdminModulesCtrl as vm'
     });
 }).run(function($rootScope, $state, Auth, loginRedirectPath) {
   Auth.$onAuth(function(user) {
