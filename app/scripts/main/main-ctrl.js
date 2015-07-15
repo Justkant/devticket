@@ -8,6 +8,7 @@ angular.module('workingRoom')
     vm.toggleSidenav = toogleSidenav;
     vm.unauth = Auth.saveDisconnect;
     vm.modules = ModulesList;
+    vm.showModulesGrid = true;
 
     updateState();
     checkModulesState($state.params);
