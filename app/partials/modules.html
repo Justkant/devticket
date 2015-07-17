@@ -1,19 +1,22 @@
 <div flex
   layout="row"
+  layout-wrap
   layout-align="start start">
-  <md-card>
+  <ui-view flex="100"></ui-view>
+  <md-card flex>
     <md-data-table-toolbar>
-      <md-select class="toolbar-selector"
+      <md-select class="toolbar-selector md-accent"
         ng-model="vm.filter"
         aria-label="select filter">
         <md-option ng-repeat="filter in vm.filters"
+          class="md-accent"
           value="{{filter}}">
           {{filter}}
         </md-option>
       </md-select>
       <div flex>
       </div>
-      <md-button class="md-primary"
+      <md-button class="md-accent"
         data-ng-click="vm.openCreateTicket($event)">
         Créer un ticket
       </md-button>

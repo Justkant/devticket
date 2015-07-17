@@ -1,16 +1,42 @@
 <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" md-selected="vm.currentTab">
   <md-tab label="Modules">
     <md-content>
-      <md-list>
-        <md-list-item data-ng-repeat="module in vm.modules" data-ng-click="vm.goAdminModule(module.$id)">
-          <p>
-            {{ module.name }}
-          </p>
-        </md-list-item>
-      </md-list>
+      <md-grid-list data-md-row-height="400px" data-md-gutter="8px" data-md-cols="1" data-md-cols-gt-md="2" flex layout-margin>
+        <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
+          <md-card layout-fill>
+            <md-card-content flex>
+              <h2 class="md-title">{{ module.name}}</h2>
+              <p>
+                Description...
+              </p>
+            </md-card-content>
+
+            <div class="md-actions" layout="row" layout-align="end center">
+              <md-button class="md-accent">Supprimer</md-button>
+              <md-button class="md-accent" data-ui-sref="main.modules.edit({id: module.$id})">Modifier</md-button>
+            </div>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
     </md-content>
   </md-tab>
   <md-tab label="Groupes">
+    <md-content>
+      <md-grid-list data-md-row-height="200px" data-md-gutter="8px" data-md-cols="2" data-md-cols-gt-md="4" flex layout-margin>
+        <md-grid-tile data-ng-repeat="group in vm.groups" data-md-rowspan="1" data-md-colspan="1">
+          <md-card layout-fill>
+            <md-card-content flex>
+              <h2 class="md-title">{{ group.name}}</h2>
+            </md-card-content>
+
+            <div class="md-actions" layout="row" layout-align="end center">
+              <md-button class="md-accent">Supprimer</md-button>
+              <md-button class="md-accent" data-ng-click="vm.openEditGroup()">Modifier</md-button>
+            </div>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-content>
   </md-tab>
   <md-tab label="Utilisateurs">
   </md-tab>

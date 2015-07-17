@@ -2,7 +2,7 @@ $accent-color: #dd0cb4;
 $accent-color-darker: #c20b9e;
 $grey: #ececec;
 $soft-grey: #f6f6f6;
-$dark-grey: #606060;
+$dark-grey: #808080;
 
 .main-content {
   padding-right: 100px;
@@ -86,8 +86,6 @@ md-sidenav {
 }
 
 md-toolbar {
-  background: $accent-color;
-  
   .toolbar-title {
     margin-left: 30px;
     

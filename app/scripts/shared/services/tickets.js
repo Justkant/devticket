@@ -15,23 +15,34 @@ angular.module('workingRoom')
         return tickets
       },
       get: function(id) {
-        if (!ticketsForModule.hasOwnProperty(id)) {
+        if (!ticketsForModule[id]) {
           ticketsForModule[id] = $firebaseArray(ref.child(id));
         }
         return ticketsForModule[id];
       },
       add: function(id, obj) {
-        if (ticketsForModule.hasOwnProperty(id)) {
+        if (ticketsForModule[id]) {
           ticketsForModule[id].$add(obj);
+        }
+      },
+      save: function(moduleId, obj) {
+        if (ticketsForModule[moduleId]) {
+          ticketsForModule[moduleId].$save(obj);
         }
       },
       getTicket: function(moduleId, ticketId) {
         return $q(function(resolve, reject) {
-          if (ticketsForModule.hasOwnProperty(moduleId)) {
+          if (ticketsForModule[moduleId]) {
             resolve(ticketsForModule[moduleId].$getRecord(ticketId));
           }
           reject();
         });
+      },
+      destroy: function() {
+        for (var moduleId in ticketsForModule) {
+          ticketsForModule[moduleId].$destroy();
+        }
+        ticketsForModule = {};
       }
     }
   });

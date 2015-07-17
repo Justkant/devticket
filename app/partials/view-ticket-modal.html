@@ -1,20 +1,40 @@
 <md-dialog flex="50">
   <md-dialog-content layout="column">
-    <div flex>
-      <h4>Sujet :</h4>
-      <p>
-        {{ vm.ticket.subject }}
-      </p>
+    <div flex layout="row">
+      <div flex>
+        <h4>Sujet :</h4>
+        <p>
+          {{ vm.ticket.subject }}
+        </p>
+      </div>
+      <div flex>
+        <h4>Description :</h4>
+        <p>
+          {{ vm.ticket.description }}
+        </p>
+      </div>
     </div>
-  <div flex>
-    <h4>Description :</h4>
-    <p>
-      {{ vm.ticket.description }}
-    </p>
-  </div>
+    <div flex>
+      <md-list>
+        <md-list-item class="md-3-line" ng-repeat="message in vm.ticket.messages">
+          <div class="md-list-item-text">
+            <h3>{{ message.author }}</h3>
+            <p style="white-space: pre;">{{ message.content }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+      <div layout="row">
+        <md-input-container flex="80">
+          <label>Rédiger une réponse</label>
+          <textarea ng-model="vm.newMessage" type="text" columns="1"></textarea>
+        </md-input-container>
+        <div flex>
+          <md-button class="md-accent md-raised" data-ng-click="vm.sendMessage()">Envoyer</md-button>
+        </div>
+      </div>
+    </div>
   </md-dialog-content>
   <div class="md-actions">
-    <md-button type="button"
-      data-ng-click="vm.cancel()">Fermer</md-button>
+    <md-button type="button" data-ng-click="vm.cancel()">Fermer</md-button>
   </div>
 </md-dialog>

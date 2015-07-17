@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('workingRoom')
-  .controller('AdminModulesCtrl', function() {
+  .controller('EditModulesCtrl', function() {
 
   });
