@@ -58,8 +58,8 @@
                         <tbody>
                         <tr ng-repeat="user in vm.users | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
                             data-ui-sref="main.users({id: user.$id})">
-                            <td>{{user.$id}}</td>
-                            <td>{{user.names}}</td>
+                            <td>{{user.$id.split(':')[1]}}</td>
+                            <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.type}}</td>
                         </tr>

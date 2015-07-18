@@ -3,11 +3,18 @@
         <md-dialog-content>
             <md-input-container flex>
                 <label>Nom</label>
-                <input data-ng-model="vm.user.name" type="text" required title="name"/>
+                <input data-ng-model="vm.user.name" type="text" name="name" required title="name"/>
+                <div data-ng-messages="userForm.name.$error">
+                    <div data-ng-message="required">Ce champ est requis.</div>
+                </div>
             </md-input-container>
             <md-input-container flex>
                 <label>Email</label>
-                <input data-ng-model="vm.user.email" type="text" required title="email"/>
+                <input data-ng-model="vm.user.email" type="email" name="email" required title="email"/>
+                <div data-ng-messages="userForm.email.$error">
+                    <div data-ng-message="required">Ce champ est requis.</div>
+                    <div data-ng-message="email">L'email est invalide.</div>
+                </div>
             </md-input-container>
             <md-radio-group ng-model="vm.user.type" required>
                 <md-radio-button value="user">Utilisateur</md-radio-button>
