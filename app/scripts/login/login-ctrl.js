@@ -1,40 +1,50 @@
 'use strict';
 
 angular.module('workingRoom')
-  .controller('LoginCtrl', function (Auth, $state) {
-    var vm = this;
+    .controller('LoginCtrl', function (Auth, $state, $stateParams, $mdDialog, Toasts) {
+        var vm = this;
 
-    if (Auth.$getAuth()) {
-      $state.go('main');
-    }
+        if (Auth.$getAuth()) {
+            goLastLocation();
+        }
 
-    vm.resendEmail = null;
-    vm.passwordReset = passwordReset;
-    vm.passwordLogin = passwordLogin;
+        vm.passwordReset = passwordReset;
+        vm.passwordLogin = passwordLogin;
 
-    function passwordLogin() {
-      Auth.$authWithPassword({
-        email: vm.email,
-        password: vm.password
-      }, {
-        rememberMe: true
-      }).then(function () {
-        $state.go('main');
-      }, function (error) {
-        console.log(error);
-      });
-    }
+        function goLastLocation() {
+            if ($stateParams.state) {
+                $state.go($stateParams.state, $stateParams.params);
+            } else {
+                $state.go('main');
+            }
+        }
 
-    function passwordReset() {
-      $('#passwordLost').closeModal();
-      Auth.$resetPassword({
-        email: vm.resetEmail
-      }).then(function () {
-        console.info('Email de récupération envoyé');
-        vm.resendEmail = null;
+        function passwordLogin() {
+            Auth.$authWithPassword({
+                email: vm.email,
+                password: vm.password
+            }, {
+                rememberMe: true
+            }).then(function () {
+                goLastLocation();
+            }, function (error) {
+                Toasts.error(error);
+            });
+        }
 
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  });
+        function passwordReset(event) {
+            $mdDialog.show({
+                controller: 'resetPasswordCtrl as vm',
+                templateUrl: 'partials/login/reset-password-modal.html',
+                targetEvent: event
+            }).then(function (email) {
+                Auth.$resetPassword({
+                    email: email
+                }).then(function () {
+                    Toasts.simple('Email de récupération envoyé');
+                }, function (error) {
+                    Toasts.error(error);
+                });
+            });
+        }
+    });

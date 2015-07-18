@@ -26,7 +26,7 @@
       <div layout="row">
         <md-input-container flex="80">
           <label>Rédiger une réponse</label>
-          <textarea ng-model="vm.newMessage" type="text" columns="1"></textarea>
+          <textarea data-ng-model="vm.newMessage" type="text" columns="1" title="nouveau message"></textarea>
         </md-input-container>
         <div flex>
           <md-button class="md-accent md-raised" data-ng-click="vm.sendMessage()">Envoyer</md-button>

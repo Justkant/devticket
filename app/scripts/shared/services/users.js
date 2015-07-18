@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-  .factory('Users', function (Ref, $firebaseArray, $firebaseObject) {
+  .factory('Users', function (Ref, $firebaseArray, $firebaseObject, $q, Toasts) {
     var ref = Ref.child('users');
     var users = null;
     var user = null;
@@ -25,19 +25,30 @@ angular.module('workingRoom')
         user = $firebaseObject(ref.child(uid));
         return user;
       },
-      create: function (uid, email, name, admin) {
+      add: function (user) {
         var def = $q.defer();
 
-        ref.child(uid).set({
-          email: email,
-          name: name,
-          admin: admin
-        }, function (err) {
-          if (err) {
-            def.reject(err);
-          } else {
-            def.resolve(ref.child(uid));
-          }
+        Ref.createUser({
+            email: user.email,
+            password: 'workingRoom'
+        }, function (error, userData) {
+            if (error) {
+                Toasts.error(error);
+            } else {
+                ref.child(userData.uid).set({
+                    email: user.email,
+                    name: user.name,
+                    type: user.type
+                }, function (err) {
+                    if (err) {
+                        Toasts.error(err);
+                        def.reject(err);
+                    } else {
+                        def.resolve(ref.child(userData.uid));
+                    }
+                });
+
+            }
         });
         return def.promise;
       },

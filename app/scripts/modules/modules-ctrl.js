@@ -21,7 +21,7 @@ angular.module('workingRoom')
     };
 
     vm.query = {
-      order: 'id',
+      order: '-id',
       limit: 10,
       page: 1,
       rowSelect: [10, 20, 50, 100, 200, 500]
@@ -29,47 +29,43 @@ angular.module('workingRoom')
 
     vm.tickets = TicketsList;
 
-    function Ticket(obj, i) {
+    /*function Ticket(obj, i) {
       this.id = i; //Math.round(Math.random() * 1000) + 1;
       this.user = obj.user;
       this.subject = obj.subject;
       this.priority = obj.priority;
-      this.vente = obj.vente;
-      this.categorie = obj.categorie;
-      this.subcategorie = obj.subcategorie;
+      this.sale = obj.sale;
+      this.category = obj.category;
+      this.subCategory = obj.subCategory;
       this.commandNb = Math.round(Math.random() * 1000) + 1;
-      this.venteNb = Math.round(Math.random() * 1000) + 1;
+      this.saleNb = Math.round(Math.random() * 1000) + 1;
       this.refSRP = Math.round(Math.random() * 1000) + 1;
       this.created = obj.created;
       this.status = obj.status;
-      this.ventePrice = obj.ventePrice;
-      this.lastReponse = obj.lastReponse;
-    }
+      this.salePrice = obj.salePrice;
+      this.lastResponse = obj.lastResponse;
+    }*/
 
     function openTicketView(event, id) {
       $mdDialog.show({
         controller: 'ViewTicketCtrl as vm',
-        templateUrl: 'partials/view-ticket-modal.html',
+        templateUrl: 'partials/modules/view-ticket-modal.html',
         targetEvent: event,
         resolve: {
           ticket: function(Tickets) {
             return Tickets.getTicket($stateParams.id, id);
           }
         }
-      }).then(function(res) {
-        console.log(res);
       });
     }
 
     function openCreateTicket(event) {
       $mdDialog.show({
         controller: 'CreateTicketCtrl as vm',
-        templateUrl: 'partials/create-ticket-modal.html',
+        templateUrl: 'partials/modules/create-ticket-modal.html',
         targetEvent: event
       }).then(function(res) {
         Tickets.add($stateParams.id, res);
-      }, function(err) {
-        console.log(err);
       });
     }
   });

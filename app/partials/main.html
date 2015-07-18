@@ -1,72 +1,87 @@
-<md-sidenav flex class="md-sidenav-left" data-md-component-id="left" data-md-is-locked-open="$mdMedia('gt-md')" layout="column" layout-fill>
-  <header class="nav-header">
-    <a href="#/" class="logo">
-      <img src="images/logo.png" alt="" />
-      <h1>Working Room</h1>
-    </a>
-    <md-divider></md-divider>
-  </header>
+<md-sidenav flex class="md-sidenav-left" data-md-component-id="left"
+            data-md-is-locked-open="$mdMedia('gt-md')"
+            layout="column" layout-fill>
+    <header class="nav-header">
+        <a data-ui-sref="main" class="logo">
+            <img src="images/logo.png" alt=""/>
 
-  <md-content>
+            <h1>Working Room</h1>
+        </a>
+        <md-divider></md-divider>
+    </header>
 
-    <md-list layout="column">
-      <md-list-item>
-        <span>Modules</span>
-      </md-list-item>
-      <md-list-item data-ng-repeat="module in vm.modules">
-        <md-button data-ui-sref="main.modules({id: module.$id})" data-ng-class="{active: vm.modulesState.hasOwnProperty(module.$id)}">{{module.name}}</md-button>
-      </md-list-item>
-    </md-list>
+    <md-content>
 
-    <md-divider></md-divider>
+        <md-list layout="column">
+            <md-list-item>
+                <span>Modules</span>
+            </md-list-item>
+            <md-list-item data-ng-repeat="module in vm.modules">
+                <md-button data-ui-sref="main.modules({id: module.$id})"
+                           data-ng-class="{active: vm.modulesState.hasOwnProperty(module.$id)}">{{module.name}}
+                </md-button>
+            </md-list-item>
+        </md-list>
 
-    <md-list layout="column">
-      <md-list-item>
-        <md-button class="black" data-ui-sref="main.profile" data-ng-class="{active: vm.currentState === 'main.profile'}">
-          <md-icon>person</md-icon>Profil</md-button>
-      </md-list-item>
-      <md-list-item>
-        <md-button class="black" data-ui-sref="main.admin" data-ng-class="{active: vm.currentState === 'main.admin'}">
-          <md-icon>settings</md-icon>Administration</md-button>
-      </md-list-item>
-      <md-list-item>
-        <md-button class="black" data-ng-click="vm.unauth()" href="">
-          <md-icon>exit_to_app</md-icon>Déconnexion</md-button>
-      </md-list-item>
-    </md-list>
-  </md-content>
+        <md-divider></md-divider>
+
+        <md-list layout="column">
+            <md-list-item>
+                <md-button class="black" data-ui-sref="main.users"
+                           data-ng-class="{active: vm.currentState === 'main.profile'}">
+                    <md-icon>person</md-icon>
+                    Profil
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="black" data-ui-sref="main.admin"
+                           data-ng-class="{active: vm.currentState === 'main.admin'}">
+                    <md-icon>settings</md-icon>
+                    Administration
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="black" data-ng-click="vm.unauth()" href="">
+                    <md-icon>exit_to_app</md-icon>
+                    Déconnexion
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-content>
 
 </md-sidenav>
 
-<div flex layout="column">
+<div flex layout="column" class="mw0">
 
-  <md-toolbar class="md-accent md-whiteframe-z2" layout="row" layout-align="start center">
-    <md-button hide-gt-md class="md-icon-button" aria-label="Menu" data-ng-click="vm.toggleSidenav()">
-      <md-icon>menu</md-icon>
-    </md-button>
-    <div class="toolbar-title">
-      <h3>{{ vm.toolbarTitle }}</h3>
-    </div>
-  </md-toolbar>
+    <md-toolbar class="md-accent md-whiteframe-z2" layout="row" layout-align="start center">
+        <md-button hide-gt-md class="md-icon-button" aria-label="Menu" data-ng-click="vm.toggleSidenav()">
+            <md-icon>menu</md-icon>
+        </md-button>
+        <div class="toolbar-title">
+            <h3>{{ vm.toolbarTitle }}</h3>
+        </div>
+    </md-toolbar>
 
-  <md-content data-ui-view data-autoscroll data-md-scroll-y layout="column">
+    <md-content data-ui-view data-autoscroll data-md-scroll-y layout="column" flex>
 
-    <md-grid-list data-ng-if="vm.showModulesGrid" data-md-row-height="400px" data-md-gutter="8px" data-md-cols="1" data-md-cols-gt-md="2" flex layout-margin>
-      <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
-        <md-card layout-fill>
-          <md-card-content flex>
-            <h2 class="md-title">{{ module.name}}</h2>
-            <p>
-              Description...
-            </p>
-          </md-card-content>
+        <md-grid-list data-ng-if="vm.showModulesGrid" data-md-row-height="400px" data-md-gutter="8px" data-md-cols="1"
+                      data-md-cols-gt-md="2" flex layout-margin>
+            <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
+                <md-card layout-fill>
+                    <md-card-content flex>
+                        <h2 class="md-title">{{ module.name}}</h2>
 
-          <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-accent">Statistiques</md-button>
-            <md-button class="md-accent" data-ui-sref="main.modules({id: module.$id})">Tickets</md-button>
-          </div>
-        </md-card>
-      </md-grid-tile>
-    </md-grid-list>
-  </md-content>
+                        <p>
+                            Description...
+                        </p>
+                    </md-card-content>
+
+                    <div class="md-actions" layout="row" layout-align="end center">
+                        <md-button class="md-accent">Statistiques</md-button>
+                        <md-button class="md-accent" data-ui-sref="main.modules({id: module.$id})">Tickets</md-button>
+                    </div>
+                </md-card>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-content>
 </div>
