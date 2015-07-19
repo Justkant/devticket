@@ -1,8 +1,11 @@
-<md-card style="margin-right: 80px;">
-  <h3>Edit modules</h3>
+<md-card style="padding: 8px;">
+    <md-input-container flex="50">
+        <label>Nom du module</label>
+        <input type="text" data-ng-model="vm.module.name" title="nom du module"/>
+    </md-input-container>
 
-  <div class="md-actions" layout="row" layout-align="end center">
-    <md-button class="md-accent" data-ui-sref="^">Fermer</md-button>
-    <md-button class="md-accent md-raised" data-ng-click="vm.openEditGroup()">Sauvegarder</md-button>
-  </div>
+    <div class="md-actions" layout="row" layout-align="end center">
+        <md-button class="md-accent" data-ui-sref="^">Fermer</md-button>
+        <md-button class="md-accent md-raised" data-ng-click="vm.saveModule()">Sauvegarder</md-button>
+    </div>
 </md-card>

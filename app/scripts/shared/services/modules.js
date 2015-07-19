@@ -1,18 +1,11 @@
 'use strict';
 
 angular.module('workingRoom')
-    .factory('Modules', function (Ref, $firebaseObject, $firebaseArray) {
+    .factory('Modules', function (Ref, $firebaseObject, $firebaseArray, $q) {
         var ref = Ref.child('modules');
         //var modulesForUser = [];
+        var modulesList = {};
         var modules = null;
-        var m = null;
-
-        function destroyIfExist() {
-            if (m) {
-                m.$destroy();
-                m = null;
-            }
-        }
 
         return {
             all: function () {
@@ -21,10 +14,17 @@ angular.module('workingRoom')
                 }
                 return modules;
             },
-            get: function () {
-                destroyIfExist();
-                m = $firebaseObject(ref.child(id));
-                return m;
+            get: function (id) {
+                return $q(function (resolve, reject) {
+                    if (!modulesList[id]) {
+                        modulesList[id] = $firebaseObject(ref.child(id));
+                    }
+                    modulesList[id].$loaded().then(function (res) {
+                        resolve(res);
+                    }, function (error) {
+                        reject(error);
+                    });
+                });
             },
             add: function (obj) {
                 return modules.$add(obj);
@@ -36,7 +36,9 @@ angular.module('workingRoom')
                 return modules.$remove(item);
             },
             destroy: function () {
-                destroyIfExist();
+                for (var moduleId in modulesList) {
+                    modulesList[moduleId].$destroy();
+                }
                 if (modules) {
                     modules.$destroy();
                     modules = null;

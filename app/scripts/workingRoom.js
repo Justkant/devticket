@@ -122,7 +122,12 @@ angular.module('workingRoom', [
         .state('main.modules.edit', {
             url: '/edit',
             templateUrl: 'partials/modules/edit-modules.html',
-            controller: 'EditModulesCtrl as vm'
+            controller: 'EditModulesCtrl as vm',
+            resolve: {
+                Module: function (Modules, $stateParams) {
+                    return Modules.get($stateParams.id);
+                }
+            }
         })
         .state('main.users', {
             url: 'users/:id',

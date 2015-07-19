@@ -1,75 +1,77 @@
-<ui-view></ui-view>
-<md-card style="margin-right: 80px">
-    <md-data-table-toolbar>
-        <md-select class="md-accent" ng-model="vm.filter" aria-label="select filter">
-            <md-option data-ng-repeat="filter in vm.filters" class="md-accent" value="{{filter}}">
-                {{filter}}
-            </md-option>
-        </md-select>
-        <div flex>
-        </div>
-        <md-button class="md-accent" data-ng-click="vm.openCreateTicket($event)">
-            Créer un ticket
-        </md-button>
-    </md-data-table-toolbar>
+<div style="margin-right: 80px;" layout="row" layout-wrap>
+    <ui-view flex="100"></ui-view>
+    <md-card flex>
+        <md-data-table-toolbar>
+            <md-select class="md-accent" ng-model="vm.filter" aria-label="select filter">
+                <md-option data-ng-repeat="filter in vm.filters" class="md-accent" value="{{filter}}">
+                    {{filter}}
+                </md-option>
+            </md-select>
+            <div flex>
+            </div>
+            <md-button class="md-accent" data-ng-click="vm.openCreateTicket($event)">
+                Créer un ticket
+            </md-button>
+        </md-data-table-toolbar>
 
-    <md-data-table-container>
-        <table md-data-table>
-            <thead md-order="vm.query.order">
-            <tr>
-                <th order-by="id">#</th>
-                <th order-by="user.name">Nom</th>
-                <th order-by="subject">Sujet</th>
-                <th order-by="priority">Priorité</th>
-                <th order-by="sale">Avant/Après Vente</th>
-                <th order-by="category">Catégorie</th>
-                <th order-by="subCategory">Sous-Catégorie</th>
-                <th order-by="commandNb">No. de Commande</th>
-                <th order-by="saleNb">No. de Vente</th>
-                <th order-by="refSRP">Ref. SRP</th>
-                <th order-by="created">Date de Création</th>
-                <th order-by="status">Statut</th>
-                <th order-by="salePrice">+1500€</th>
-                <th order-by="lastResponse">Dernière Réponse Par</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
-                data-ng-click="vm.openTicketView($event, ticket.$id)">
-                <td>{{ticket.id}}</td>
-                <td>{{ticket.user.name}}</td>
-                <td>{{ticket.subject}}</td>
-                <td>{{ticket.priority}}</td>
-                <td>{{ticket.sale}}</td>
-                <td>{{ticket.category}}</td>
-                <td>{{ticket.subCategory}}</td>
-                <td>{{ticket.commandNb}}</td>
-                <td>{{ticket.saleNb}}</td>
-                <td>{{ticket.refSRP}}</td>
-                <td>{{ticket.created}}</td>
-                <td>{{ticket.status}}</td>
-                <td>{{ticket.salePrice}}</td>
-                <td>{{ticket.lastResponse}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </md-data-table-container>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-order="vm.query.order">
+                <tr>
+                    <th order-by="id">#</th>
+                    <th order-by="user.name">Nom</th>
+                    <th order-by="subject">Sujet</th>
+                    <th order-by="priority">Priorité</th>
+                    <th order-by="sale">Avant/Après Vente</th>
+                    <th order-by="category">Catégorie</th>
+                    <th order-by="subCategory">Sous-Catégorie</th>
+                    <th order-by="commandNb">No. de Commande</th>
+                    <th order-by="saleNb">No. de Vente</th>
+                    <th order-by="refSRP">Ref. SRP</th>
+                    <th order-by="created">Date de Création</th>
+                    <th order-by="status">Statut</th>
+                    <th order-by="salePrice">+1500€</th>
+                    <th order-by="lastResponse">Dernière Réponse Par</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
+                    data-ng-click="vm.openTicketView($event, ticket.$id)">
+                    <td>{{ticket.id}}</td>
+                    <td>{{ticket.user.name}}</td>
+                    <td>{{ticket.subject}}</td>
+                    <td>{{ticket.priority}}</td>
+                    <td>{{ticket.sale}}</td>
+                    <td>{{ticket.category}}</td>
+                    <td>{{ticket.subCategory}}</td>
+                    <td>{{ticket.commandNb}}</td>
+                    <td>{{ticket.saleNb}}</td>
+                    <td>{{ticket.refSRP}}</td>
+                    <td>{{ticket.created}}</td>
+                    <td>{{ticket.status}}</td>
+                    <td>{{ticket.salePrice}}</td>
+                    <td>{{ticket.lastResponse}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
 
-    <md-data-table-toolbar layout-align="end" fix-bottom update-func="vm">
-        <md-data-table-pagination md-label="vm.label" md-limit="vm.query.limit" md-page="vm.query.page"
-                                  md-row-select="vm.query.rowSelect" md-total="{{vm.tickets.length}}">
-        </md-data-table-pagination>
-    </md-data-table-toolbar>
-</md-card>
+        <md-data-table-toolbar layout-align="end" fix-bottom update-func="vm">
+            <md-data-table-pagination md-label="vm.label" md-limit="vm.query.limit" md-page="vm.query.page"
+                                      md-row-select="vm.query.rowSelect" md-total="{{vm.tickets.length}}">
+            </md-data-table-pagination>
+        </md-data-table-toolbar>
+    </md-card>
+</div>
 <md-fab-speed-dial class="fab md-scale" data-md-direction="up">
     <md-fab-trigger>
-        <md-button aria-label="search" data-ui-sref=".search" class="md-fab accent">
+        <md-button aria-label="search" data-ui-sref="main.modules.search({id: vm.moduleId})" class="md-fab accent">
             <md-tooltip data-md-direction="left">Rechercher un ticket</md-tooltip>
             <md-icon>search</md-icon>
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-        <md-button aria-label="group-settings" data-ui-sref=".edit" class="md-fab md-raised md-mini">
+        <md-button aria-label="group-settings" data-ui-sref="main.modules.edit({id: vm.moduleId})" class="md-fab md-raised md-mini">
             <md-tooltip data-md-direction="left">Edition du module</md-tooltip>
             <md-icon style="color: #808080;">settings</md-icon>
         </md-button>
