@@ -10,11 +10,14 @@ angular.module('workingRoom')
         vm.saveModule = saveModule;
 
         function saveModule() {
-            Module.$save(vm.module).then(function () {
-                Toasts.simple('Sauvegarde réussie');
-                $state.go('^');
-            }, function (error) {
-                Toasts.error(error);
-            });
+            if (vm.module.name.length > 0) {
+                Module.name = vm.module.name;
+                Module.$save().then(function () {
+                    Toasts.simple('Sauvegarde réussie');
+                    $state.go('^');
+                }, function (error) {
+                    Toasts.error(error);
+                });
+            }
         }
     });

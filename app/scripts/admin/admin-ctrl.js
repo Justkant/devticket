@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('AdminCtrl', function ($mdDialog, $state, Modules, Groups, Users, Tickets, ModulesList, GroupsList, UsersList) {
+    .controller('AdminCtrl', function ($mdDialog, $state, Modules, Groups, Users, Tickets, ModulesList, GroupsList, UsersList, Toasts) {
         var vm = this;
 
         vm.modules = ModulesList;
@@ -74,7 +74,11 @@ angular.module('workingRoom')
             }).then(function (res) {
                 if (res.name.length > 0) {
                     group.name = res.name;
-                    Groups.save(group);
+                    Groups.save(group).then(function () {
+                        Toasts.simple('Sauvegarde réussie');
+                    }, function (error) {
+                        Toasts.error(error);
+                    });
                 }
             });
         }

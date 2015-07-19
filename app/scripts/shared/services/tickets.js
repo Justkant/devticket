@@ -23,7 +23,9 @@ angular.module('workingRoom')
             add: function (id, obj) {
                 if (ticketsForModule[id]) {
                     obj.id = ticketsForModule[id].length + 1;
-                    ticketsForModule[id].$add(obj);
+                    return ticketsForModule[id].$add(obj);
+                } else {
+                    return $q(function (resolve, reject) { reject(); });
                 }
             },
             save: function (moduleId, obj) {

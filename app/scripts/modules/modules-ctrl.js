@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, $stateParams, $mdDialog) {
+    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts) {
         var vm = this;
 
         vm.moduleId = $stateParams.id;
@@ -53,6 +53,9 @@ angular.module('workingRoom')
                 templateUrl: 'partials/modules/view-ticket-modal.html',
                 targetEvent: event,
                 resolve: {
+                    User: function () {
+                        return User;
+                    },
                     ticket: function (Tickets) {
                         return Tickets.getTicket($stateParams.id, id);
                     }
@@ -66,7 +69,11 @@ angular.module('workingRoom')
                 templateUrl: 'partials/modules/create-ticket-modal.html',
                 targetEvent: event
             }).then(function (res) {
-                Tickets.add($stateParams.id, res);
+                Tickets.add($stateParams.id, res).then(function () {
+                    Toasts.simple('Ticket créé');
+                }, function (error) {
+                    Toasts.error(error);
+                });
             });
         }
     });
