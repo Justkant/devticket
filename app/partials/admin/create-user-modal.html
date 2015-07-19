@@ -3,7 +3,7 @@
         <md-dialog-content>
             <md-input-container flex>
                 <label>Nom</label>
-                <input data-ng-model="vm.user.name" type="text" name="name" required title="name"/>
+                <input autofocus data-ng-model="vm.user.name" type="text" name="name" required title="name"/>
                 <div data-ng-messages="userForm.name.$error">
                     <div data-ng-message="required">Ce champ est requis.</div>
                 </div>

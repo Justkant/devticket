@@ -2,17 +2,17 @@
   "name": "workingRoom",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.4.1",
-    "angular-animate": "~1.4.1",
-    "angular-cookies": "~1.4.1",
-    "angular-sanitize": "~1.4.1",
-    "angular-resource": "~1.4.1",
-    "firebase": "~2.2.7",
-    "angularfire": "~1.1.2",
-    "angular-material": "~0.10.1-rc2",
+    "angular": "1.4.3",
     "angular-ui-router": "~0.2.15",
+    "angular-animate": "1.4.3",
+    "angular-cookies": "1.4.3",
+    "angular-sanitize": "1.4.3",
+    "angular-resource": "1.4.3",
+    "angular-messages": "1.4.3",
+    "angular-touch": "1.4.3",
+    "angular-material": "~0.10.1-rc2",
     "angular-material-data-table": "*",
-    "angular-messages": "~1.4.1",
-    "angular-touch": "~1.4.3"
+    "firebase": "~2.2.7",
+    "angularfire": "~1.1.2"
   }
 }
