@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('EditModulesCtrl', function (Module, Toasts, $state) {
+    .controller('EditModulesCtrl', function (Module, Toasts, $state, $mdDialog) {
         var vm = this;
 
         vm.moduleId = Module.$id;
@@ -12,6 +12,7 @@ angular.module('workingRoom')
         vm.newTicketField = '';
         vm.saveModule = saveModule;
         vm.addTicketField = addTicketField;
+        vm.openEditTicketField = openEditTicketField;
 
         function addTicketField() {
             if (vm.newTicketField.length > 0) {
@@ -23,6 +24,19 @@ angular.module('workingRoom')
 
                 vm.newTicketField = '';
             }
+        }
+
+        function openEditTicketField(event, field) {
+            $mdDialog.show({
+                controller: 'EditTicketFieldCtrl as vm',
+                templateUrl: 'partials/modules/edit-ticket-field-ctrl.html',
+                targetEvent: event,
+                resolve: {
+                    field: function () {
+                        return field;
+                    }
+                }
+            });
         }
 
         function saveModule() {

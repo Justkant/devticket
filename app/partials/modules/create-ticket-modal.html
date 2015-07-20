@@ -1,19 +1,19 @@
 <md-dialog flex="50">
     <form name="ticketForm" data-ng-submit="vm.hide(vm.ticket)">
-        <md-dialog-content>
-            <md-input-container flex>
+        <md-dialog-content layout="row" layout-wrap="">
+            <md-input-container flex="100">
                 <label>Sujet</label>
                 <input autofocus data-ng-model="vm.ticket.subject" type="text" required title="sujet"/>
             </md-input-container>
-            <md-input-container flex>
-                <label>Description</label>
-                <textarea data-ng-model="vm.ticket.description" type="text"
-                          columns="1" required title="description"></textarea>
-            </md-input-container>
-            <md-input-container flex data-ng-repeat="(key, field) in vm.module.ticketFields">
+            <md-input-container flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
                 <label>{{field.name}}</label>
                 <textarea data-ng-model="vm.ticket[key]" type="text"
                           columns="1" required title="{{field.name}}"></textarea>
+            </md-input-container>
+            <md-input-container flex="100">
+                <label>Message</label>
+                <textarea data-ng-model="vm.ticket.description" type="text"
+                          columns="1" required title="message"></textarea>
             </md-input-container>
         </md-dialog-content>
         <div class="md-actions">

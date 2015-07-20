@@ -17,10 +17,13 @@
         </md-button>
     </form>
     <md-divider></md-divider>
-    <div layout-padding>
-        <div data-ng-repeat="field in vm.module.ticketFields">
-            <h3> {{ field.name }} </h3>
-        </div>
+    <div layout="row" layout-wrap layout-padding>
+        <md-card flex="20" data-ng-repeat="field in vm.module.ticketFields"
+                 data-ng-click="vm.openEditTicketField($event, field)">
+            <md-card-content>
+                <h4>{{ field.name }}</h4>
+            </md-card-content>
+        </md-card>
     </div>
     <md-divider data-ng-show="vm.module.ticketFields.length > 0"></md-divider>
     <div class="md-actions" layout="row" layout-align="end center">

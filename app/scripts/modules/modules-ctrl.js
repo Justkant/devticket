@@ -57,6 +57,9 @@ angular.module('workingRoom')
                     User: function () {
                         return User;
                     },
+                    module: function () {
+                        return Module;
+                    },
                     ticket: function (Tickets) {
                         return Tickets.getTicket($stateParams.id, id);
                     }

@@ -20,7 +20,7 @@ angular.module('workingRoom')
         };
 
         vm.query = {
-            order: '-$id',
+            order: '-id',
             limit: 10,
             page: 1,
             rowSelect: [10, 20, 50, 100, 200, 500]

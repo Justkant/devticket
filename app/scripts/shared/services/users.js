@@ -36,6 +36,7 @@ angular.module('workingRoom')
                 Toasts.error(error);
             } else {
                 ref.child(userData.uid).set({
+                    id: userData.uid.split(':')[1],
                     email: user.email,
                     name: user.name,
                     type: user.type

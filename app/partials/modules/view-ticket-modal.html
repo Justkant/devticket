@@ -1,38 +1,38 @@
 <md-dialog flex="66">
     <md-dialog-content layout="column" style="padding: 0;">
-        <div flex layout="row" style="padding: 20px;">
-            <div flex>
-                <h4>Sujet :</h4>
-
-                <p>
-                    {{ vm.ticket.subject }}
-                </p>
+        <md-content>
+            <div flex layout="row" layout-wrap style="padding: 20px;">
+                <div flex="100">
+                    <h4>Sujet :</h4>
+                    <p>{{ vm.ticket.subject }}</p>
+                </div>
+                <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
+                    <h4>{{field.name}} :</h4>
+                    <p>{{ vm.ticket[key] }}</p>
+                </div>
+                <div flex="100">
+                    <h4>Description :</h4>
+                    <p>{{ vm.ticket.description }}</p>
+                </div>
             </div>
-            <div flex>
-                <h4>Description :</h4>
+            <md-divider></md-divider>
+            <div flex style="overflow-x: hidden;">
+                <md-list data-ng-show="vm.ticket.messages.length > 0">
+                    <md-subheader class="md-no-sticky">{{ vm.ticket.messages.length }} réponse(s)</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="message in vm.ticket.messages" style="padding: 0; margin-left:16px;">
+                        <div class="md-list-item-text">
+                            <h3>{{ message.author.name }}</h3>
 
-                <p>
-                    {{ vm.ticket.description }}
-                </p>
+                            <p style="white-space: pre;">{{ message.content }}</p>
+                            <md-divider data-ng-if="!$last"></md-divider>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div layout="row">
+                </div>
             </div>
-        </div>
+        </md-content>
         <md-divider></md-divider>
-        <div flex style="max-height: 300px; overflow-y: auto; overflow-x: hidden;">
-            <md-list data-ng-show="vm.ticket.messages.length > 0">
-                <md-subheader class="md-no-sticky">{{ vm.ticket.messages.length }} réponse(s)</md-subheader>
-                <md-list-item class="md-3-line" ng-repeat="message in vm.ticket.messages" style="padding: 0; margin-left:16px;">
-                    <div class="md-list-item-text">
-                        <h3>{{ message.author.name }}</h3>
-
-                        <p style="white-space: pre;">{{ message.content }}</p>
-                        <md-divider data-ng-if="!$last"></md-divider>
-                    </div>
-                </md-list-item>
-            </md-list>
-            <div layout="row">
-            </div>
-        </div>
-        <md-divider data-ng-show="vm.ticket.messages.length > 0"></md-divider>
     </md-dialog-content>
     <div class="md-actions">
         <md-input-container flex>

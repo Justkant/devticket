@@ -42,14 +42,11 @@
     <md-tab label="Utilisateurs">
         <md-content>
             <md-card>
-                <md-data-table-toolbar>
-                </md-data-table-toolbar>
-
                 <md-data-table-container>
                     <table md-data-table>
                         <thead md-order="vm.query.order">
                         <tr>
-                            <th order-by="$id">#</th>
+                            <th order-by="id">#</th>
                             <th order-by="name">Nom</th>
                             <th order-by="email">Email</th>
                             <th order-by="type">Type</th>
@@ -58,7 +55,7 @@
                         <tbody>
                         <tr ng-repeat="user in vm.users | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
                             data-ui-sref="main.users({id: user.$id})">
-                            <td>{{user.$id.split(':')[1]}}</td>
+                            <td>{{user.id}}</td>
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.type}}</td>

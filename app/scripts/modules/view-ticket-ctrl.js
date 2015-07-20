@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets) {
+    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets, module) {
         var vm = this;
 
+        vm.module = module;
         vm.ticket = ticket;
         vm.newMessage = '';
         vm.sendMessage = sendMessage;
@@ -20,6 +21,7 @@ angular.module('workingRoom')
                 ticket.lastResponse = User.name;
                 Tickets.save($stateParams.id, ticket);
                 vm.newMessage = '';
+                $mdDialog.hide();
             }
         }
     });
