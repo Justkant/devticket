@@ -17,6 +17,7 @@ angular.module('workingRoom')
                     author: {id: User.$id, name: User.name},
                     content: vm.newMessage
                 });
+                ticket.lastResponse = User.name;
                 Tickets.save($stateParams.id, ticket);
                 vm.newMessage = '';
             }

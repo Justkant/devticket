@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts) {
+    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module) {
         var vm = this;
 
         vm.moduleId = $stateParams.id;
+        vm.module = Module;
         vm.openCreateTicket = openCreateTicket;
         vm.openTicketView = openTicketView;
 
@@ -67,7 +68,15 @@ angular.module('workingRoom')
             $mdDialog.show({
                 controller: 'CreateTicketCtrl as vm',
                 templateUrl: 'partials/modules/create-ticket-modal.html',
-                targetEvent: event
+                targetEvent: event,
+                resolve: {
+                    Module: function () {
+                        return Module;
+                    },
+                    User: function () {
+                        return User;
+                    }
+                }
             }).then(function (res) {
                 Tickets.add($stateParams.id, res).then(function () {
                     Toasts.simple('Ticket créé');

@@ -1,4 +1,4 @@
-<div style="margin-right: 80px;" layout="row" layout-wrap>
+<div layout="row" layout-wrap style="margin-right: 80px;">
     <ui-view flex="100"></ui-view>
     <md-card flex>
         <md-data-table-toolbar>
@@ -21,17 +21,12 @@
                     <th order-by="id">#</th>
                     <th order-by="user.name">Nom</th>
                     <th order-by="subject">Sujet</th>
-                    <th order-by="priority">Priorité</th>
-                    <th order-by="sale">Avant/Après Vente</th>
-                    <th order-by="category">Catégorie</th>
-                    <th order-by="subCategory">Sous-Catégorie</th>
-                    <th order-by="commandNb">No. de Commande</th>
-                    <th order-by="saleNb">No. de Vente</th>
-                    <th order-by="refSRP">Ref. SRP</th>
                     <th order-by="created">Date de Création</th>
-                    <th order-by="status">Statut</th>
-                    <th order-by="salePrice">+1500€</th>
                     <th order-by="lastResponse">Dernière Réponse Par</th>
+                    <th order-by="{{key}}"
+                        data-ng-repeat="(key, field) in vm.module.ticketFields">
+                        {{field.name}}
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,17 +35,11 @@
                     <td>{{ticket.id}}</td>
                     <td>{{ticket.user.name}}</td>
                     <td>{{ticket.subject}}</td>
-                    <td>{{ticket.priority}}</td>
-                    <td>{{ticket.sale}}</td>
-                    <td>{{ticket.category}}</td>
-                    <td>{{ticket.subCategory}}</td>
-                    <td>{{ticket.commandNb}}</td>
-                    <td>{{ticket.saleNb}}</td>
-                    <td>{{ticket.refSRP}}</td>
-                    <td>{{ticket.created}}</td>
-                    <td>{{ticket.status}}</td>
-                    <td>{{ticket.salePrice}}</td>
+                    <td>{{ticket.created | date}}</td>
                     <td>{{ticket.lastResponse}}</td>
+                    <td data-ng-repeat="(key, field) in vm.module.ticketFields">
+                        {{ticket[key]}}
+                    </td>
                 </tr>
                 </tbody>
             </table>

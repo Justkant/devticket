@@ -38,6 +38,7 @@ angular.module('workingRoom')
             destroy: function () {
                 for (var moduleId in modulesList) {
                     modulesList[moduleId].$destroy();
+                    modulesList[moduleId] = null;
                 }
                 if (modules) {
                     modules.$destroy();

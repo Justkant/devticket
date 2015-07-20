@@ -107,6 +107,9 @@ angular.module('workingRoom', [
                 User: function (User) {
                     return User;
                 },
+                Module: function ($stateParams, Modules) {
+                    return Modules.get($stateParams.id);
+                },
                 TicketsList: function (Tickets, $stateParams) {
                     return Tickets.get($stateParams.id);
                 }

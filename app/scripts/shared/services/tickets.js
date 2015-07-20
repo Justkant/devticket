@@ -23,6 +23,7 @@ angular.module('workingRoom')
             add: function (id, obj) {
                 if (ticketsForModule[id]) {
                     obj.id = ticketsForModule[id].length + 1;
+                    obj.created = new Date().getTime();
                     return ticketsForModule[id].$add(obj);
                 } else {
                     return $q(function (resolve, reject) { reject(); });
@@ -47,8 +48,8 @@ angular.module('workingRoom')
             destroy: function () {
                 for (var moduleId in ticketsForModule) {
                     ticketsForModule[moduleId].$destroy();
+                    ticketsForModule[moduleId] = null;
                 }
-                ticketsForModule = {};
             }
         }
     });

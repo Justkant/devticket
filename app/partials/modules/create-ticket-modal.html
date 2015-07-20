@@ -10,6 +10,11 @@
                 <textarea data-ng-model="vm.ticket.description" type="text"
                           columns="1" required title="description"></textarea>
             </md-input-container>
+            <md-input-container flex data-ng-repeat="(key, field) in vm.module.ticketFields">
+                <label>{{field.name}}</label>
+                <textarea data-ng-model="vm.ticket[key]" type="text"
+                          columns="1" required title="{{field.name}}"></textarea>
+            </md-input-container>
         </md-dialog-content>
         <div class="md-actions">
             <md-button type="button" data-ng-click="vm.cancel()">
