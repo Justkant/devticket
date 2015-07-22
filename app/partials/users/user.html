@@ -7,6 +7,16 @@
         <md-icon>person</md-icon>
         <input data-ng-model="vm.user.name" type="text" title="Nom d'utilisateur">
       </md-input-container>
+      <md-input-container class="md-icon-float">
+        <label>Mail</label>
+        <md-icon>email</md-icon>
+        <input data-ng-model="vm.user.email" type="text" title="Mail de l'utilisateur">
+      </md-input-container>
+    <md-input-container class="md-icon-float">
+      <label>Groupes</label>
+      <md-icon>group</md-icon>
+      <input data-ng-model="vm.user.groups" type="text" title="Groupes de l'utilisateur">
+    </md-input-container>
     </md-card-content>
   </md-card>
 </div>

@@ -39,7 +39,8 @@ angular.module('workingRoom')
                     id: userData.uid.split(':')[1],
                     email: user.email,
                     name: user.name,
-                    type: user.type
+                    type: user.type,
+                    groups: user.groups
                 }, function (err) {
                     if (err) {
                         Toasts.error(err);
