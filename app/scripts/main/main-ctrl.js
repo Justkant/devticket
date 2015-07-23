@@ -7,6 +7,7 @@ angular.module('workingRoom')
         vm.currentState = $state.current.name;
         vm.toggleSidenav = toogleSidenav;
         vm.modules = ModulesList;
+        vm.user = User;
         vm.showModulesGrid = true;
 
         updateState();
@@ -35,6 +36,9 @@ angular.module('workingRoom')
 
         function updateState() {
             switch (vm.currentState) {
+                case 'main':
+                    vm.toolbarTitle = 'Modules';
+                    break;
                 case 'main.modules':
                 case 'main.modules.edit':
                     vm.toolbarTitle = 'Module';
@@ -49,9 +53,8 @@ angular.module('workingRoom')
                 case 'main.users.edit':
                     vm.toolbarTitle = 'Profil';
                     break;
-                case 'main':
                 default:
-                    vm.toolbarTitle = 'Modules';
+                    vm.toolbarTitle = 'WorkingRoom';
             }
 
             function logout() {

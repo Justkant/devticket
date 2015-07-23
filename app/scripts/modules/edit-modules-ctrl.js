@@ -29,7 +29,7 @@ angular.module('workingRoom')
         function openEditTicketField(event, field) {
             $mdDialog.show({
                 controller: 'EditTicketFieldCtrl as vm',
-                templateUrl: 'partials/modules/edit-ticket-field-ctrl.html',
+                templateUrl: 'partials/modules/edit-ticket-field.html',
                 targetEvent: event,
                 resolve: {
                     field: function () {

@@ -78,7 +78,7 @@ angular.module('workingRoom', [
                 User: function ($q, Auth, Users) {
                     return $q(function (resolve, reject) {
                         Auth.$requireAuth().then(function (user) {
-                            Users.get(user.uid).$loaded().then(function (user) {
+                            Users.get(user.uid).then(function (user) {
                                 resolve(user);
                             }, function (error) {
                                 reject(error);
@@ -118,37 +118,90 @@ angular.module('workingRoom', [
         .state('main.modules.stats', {
             url: '/stats',
             templateUrl: 'partials/modules/modules-stats.html',
-            controller: 'ModulesStatsCtrl as vm'
+            controller: 'ModulesStatsCtrl as vm',
+            resolve: {
+                Module: function (Module) {
+                    return Module;
+                }
+            }
         })
         .state('main.modules.search', {
             url: '/search',
             templateUrl: 'partials/modules/modules-search.html',
-            controller: 'ModulesSearchCtrl as vm'
+            controller: 'ModulesSearchCtrl as vm',
+            resolve: {
+                Module: function (Module) {
+                    return Module;
+                }
+            }
         })
         .state('main.modules.edit', {
             url: '/edit',
             templateUrl: 'partials/modules/edit-modules.html',
             controller: 'EditModulesCtrl as vm',
             resolve: {
-                Module: function (Modules, $stateParams) {
-                    return Modules.get($stateParams.id);
+                authorization: function(User, $q) {
+                    return $q(function (resolve, reject) {
+                        if (User.type === 'admin') {
+                            resolve(User.type);
+                        } else {
+                            reject(User.type);
+                        }
+                    });
+                },
+                Module: function (Module) {
+                    return Module;
                 }
             }
         })
         .state('main.users', {
             url: 'users/:id',
             templateUrl: 'partials/users/user.html',
-            controller: 'UserCtrl as vm'
+            controller: 'UserCtrl as vm',
+            resolve: {
+                user: function(Users, $stateParams) {
+                    return Users.get($stateParams.id);
+                },
+                GroupsList: function (GroupsList) {
+                    return GroupsList;
+                }
+            }
         })
         .state('main.users.edit', {
             url: '/edit',
             templateUrl: 'partials/users/edit-user.html',
-            controller: 'EditUserCtrl as vm'
+            controller: 'EditUserCtrl as vm',
+            resolve: {
+                user: function (User, user, $q) {
+                    return $q(function (resolve, reject) {
+                        if (User.$id === user.$id || User.type === 'admin') {
+                            resolve(user);
+                        } else {
+                            reject('NOT_AUTHORIZED');
+                        }
+                    });
+
+                },
+                GroupsList: function (GroupsList) {
+                    return GroupsList;
+                }
+            }
         })
         .state('main.admin', {
             url: 'admin',
             templateUrl: 'partials/admin/admin.html',
-            controller: 'AdminCtrl as vm'
+            controller: 'AdminCtrl as vm',
+            resolve: {
+                authorization: function(User, $q) {
+                    return $q(function (resolve, reject) {
+                        if (User.type === 'admin') {
+                            resolve(User.type);
+                        } else {
+                            reject(User.type);
+                        }
+                    });
+                }
+            }
         });
 }).run(function ($rootScope, $state, Auth, loginRedirectPath) {
     Auth.$onAuth(function (user) {

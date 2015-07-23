@@ -2,15 +2,15 @@
     <md-dialog-content layout="column" style="padding: 0;">
         <md-content>
             <div flex layout="row" layout-wrap style="padding: 20px;">
-                <div flex="100">
+                <div flex="100" layout-padding>
                     <h4>Sujet :</h4>
                     <p>{{ vm.ticket.subject }}</p>
                 </div>
-                <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
+                <div flex="50" layout-padding data-ng-repeat="(key, field) in vm.module.ticketFields">
                     <h4>{{field.name}} :</h4>
                     <p>{{ vm.ticket[key] }}</p>
                 </div>
-                <div flex="100">
+                <div flex="100" layout-padding>
                     <h4>Description :</h4>
                     <p>{{ vm.ticket.description }}</p>
                 </div>
@@ -34,7 +34,7 @@
         </md-content>
         <md-divider></md-divider>
     </md-dialog-content>
-    <div class="md-actions">
+    <div class="md-actions" layout-padding>
         <md-input-container flex>
             <label>Rédiger une réponse</label>
             <textarea md-no-autogrow data-ng-model="vm.newMessage" type="text" columns="1" title="nouveau message"></textarea>

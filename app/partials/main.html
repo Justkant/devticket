@@ -11,14 +11,12 @@
     </header>
 
     <md-content>
-
         <md-list layout="column">
             <md-list-item>
                 <span>Modules</span>
             </md-list-item>
             <md-list-item data-ng-repeat="module in vm.modules">
-                <md-button data-ui-sref="main.modules({id: module.$id})"
-                           data-ng-class="{active: vm.modulesState.hasOwnProperty(module.$id)}">{{module.name}}
+                <md-button data-ui-sref="main.modules({id: module.$id})" data-ui-sref-active="active">{{module.name}}
                 </md-button>
             </md-list-item>
         </md-list>
@@ -27,15 +25,13 @@
 
         <md-list layout="column">
             <md-list-item>
-                <md-button class="black" data-ui-sref="main.users"
-                           data-ng-class="{active: vm.currentState === 'main.profile'}">
+                <md-button class="black" data-ui-sref="main.users({id: vm.user.$id})" data-ui-sref-active="active">
                     <md-icon>person</md-icon>
                     Profil
                 </md-button>
             </md-list-item>
-            <md-list-item>
-                <md-button class="black" data-ui-sref="main.admin"
-                           data-ng-class="{active: vm.currentState === 'main.admin'}">
+            <md-list-item data-ng-if="vm.user.type === 'admin'">
+                <md-button class="black" data-ui-sref="main.admin" data-ui-sref-active="active">
                     <md-icon>settings</md-icon>
                     Administration
                 </md-button>
@@ -48,11 +44,9 @@
             </md-list-item>
         </md-list>
     </md-content>
-
 </md-sidenav>
 
 <div flex layout="column" class="mw0">
-
     <md-toolbar class="md-accent md-whiteframe-z2" layout="row" layout-align="start center">
         <md-button hide-gt-md class="md-icon-button" aria-label="Menu" data-ng-click="vm.toggleSidenav()">
             <md-icon>menu</md-icon>
@@ -71,9 +65,7 @@
                     <md-card-content flex>
                         <h2 class="md-title">{{ module.name}}</h2>
 
-                        <p>
-                            Description...
-                        </p>
+                        <p>Description...</p>
                     </md-card-content>
 
                     <div class="md-actions" layout="row" layout-align="end center">

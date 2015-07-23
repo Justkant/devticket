@@ -10,7 +10,7 @@
     "angular-resource": "1.4.3",
     "angular-messages": "1.4.3",
     "angular-touch": "1.4.3",
-    "angular-material": "~0.10.1-rc2",
+    "angular-material": "~0.10.1-rc3",
     "angular-material-data-table": "*",
     "firebase": "~2.2.7",
     "angularfire": "~1.1.2"

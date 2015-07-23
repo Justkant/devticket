@@ -4,14 +4,7 @@ angular.module('workingRoom')
   .factory('Users', function (Ref, $firebaseArray, $firebaseObject, $q, Toasts) {
     var ref = Ref.child('users');
     var users = null;
-    var user = null;
-
-    function destroyIfExist() {
-      if (user) {
-        user.$destroy();
-        user = null;
-      }
-    }
+    var usersList = {};
 
     return {
       all: function () {
@@ -20,10 +13,17 @@ angular.module('workingRoom')
         }
         return users;
       },
-      get: function (uid) {
-        destroyIfExist();
-        user = $firebaseObject(ref.child(uid));
-        return user;
+      get: function (id) {
+          return $q(function (resolve, reject) {
+              if (!usersList[id]) {
+                  usersList[id] = $firebaseObject(ref.child(id));
+              }
+              usersList[id].$loaded().then(function (res) {
+                  resolve(res);
+              }, function (error) {
+                  reject(error);
+              });
+          });
       },
       add: function (user) {
         var def = $q.defer();
@@ -39,8 +39,7 @@ angular.module('workingRoom')
                     id: userData.uid.split(':')[1],
                     email: user.email,
                     name: user.name,
-                    type: user.type,
-                    groups: user.groups
+                    type: user.type
                 }, function (err) {
                     if (err) {
                         Toasts.error(err);
@@ -55,8 +54,11 @@ angular.module('workingRoom')
         return def.promise;
       },
       destroy: function () {
-        destroyIfExist();
-        if (users) {
+          for (var userId in usersList) {
+              usersList[userId].$destroy();
+              usersList[userId] = null;
+          }
+          if (users) {
           users.$destroy();
           users = null;
         }
