@@ -4,6 +4,10 @@
             <md-card-content>
                 <h3>{{vm.user.name}}</h3>
 
+                <div layout="row" layout-align="start center" data-ng-show="!vm.user.connected">
+                    <h5 layout-margin>Dernière connexion: </h5><span data-am-time-ago="vm.user.lastOnline"></span>
+                </div>
+                <h5 data-ng-show="vm.user.connected">Connecté</h5>
             </md-card-content>
         </md-card>
     </div>

@@ -11,7 +11,8 @@ angular.module('workingRoom', [
     'ngMaterial',
     'ui.router',
     'md.data.table',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'angularMoment'
 ]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
     $mdThemingProvider.definePalette('workingRoomPrimary', {
         "50": "#f2f2f2",
@@ -209,7 +210,9 @@ angular.module('workingRoom', [
                 }
             }
         });
-}).run(function ($rootScope, $state, Auth, loginRedirectPath) {
+}).run(function ($rootScope, $state, Auth, loginRedirectPath, amMoment) {
+    amMoment.changeLocale('fr');
+
     Auth.$onAuth(function (user) {
         if (!user) {
             if ($state.current.name.length > 0) {

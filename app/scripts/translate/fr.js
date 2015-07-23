@@ -7,7 +7,5 @@ angular.module('workingRoom')
             SIDENAV_PROFILE: 'Profil',
             SIDENAV_ADMIN: 'Administration',
             SIDENAV_LOGOUT: 'Déconnexion'
-        });
-
-        $translateProvider.preferredLanguage('fr');
+        }).useSanitizeValueStrategy('escape').preferredLanguage('fr');
     });

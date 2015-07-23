@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('MainCtrl', function ($rootScope, $state, $mdSidenav, Auth, User, ModulesList, Users, Modules, Groups, Tickets) {
+    .controller('MainCtrl', function ($rootScope, $state, $mdSidenav, $translate, amMoment, Auth, User, ModulesList, Users, Modules, Groups, Tickets) {
         var vm = this;
 
         vm.currentState = $state.current.name;
@@ -9,6 +9,8 @@ angular.module('workingRoom')
         vm.modules = ModulesList;
         vm.user = User;
         vm.showModulesGrid = true;
+        vm.selectedLocale = 'fr';
+        vm.changeLocale = changeLocale;
 
         updateState();
         checkModulesState($state.params);
@@ -66,5 +68,10 @@ angular.module('workingRoom')
             }
 
             vm.unauth = logout;
+        }
+
+        function changeLocale() {
+            $translate.use(vm.selectedLocale);
+            amMoment.changeLocale(vm.selectedLocale);
         }
     });

@@ -14,16 +14,10 @@ angular.module('workingRoom')
                 return users;
             },
             get: function (id) {
-                return $q(function (resolve, reject) {
-                    if (!usersList[id]) {
-                        usersList[id] = $firebaseObject(ref.child(id));
-                    }
-                    usersList[id].$loaded().then(function (res) {
-                        resolve(res);
-                    }, function (error) {
-                        reject(error);
-                    });
-                });
+                if (!usersList[id]) {
+                    usersList[id] = $firebaseObject(ref.child(id));
+                }
+                return usersList[id].$loaded();
             },
             add: function (user) {
                 var def = $q.defer();

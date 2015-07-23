@@ -54,6 +54,14 @@
         <div class="toolbar-title">
             <h3>{{ vm.toolbarTitle }}</h3>
         </div>
+        <div flex></div>
+        <md-select style="margin-right: 20px;color: white !important;"
+                   aria-label="select language"
+                   data-md-on-close="vm.changeLocale()"
+                   data-ng-model="vm.selectedLocale">
+            <md-option value="fr">Français</md-option>
+            <md-option value="en">English</md-option>
+        </md-select>
     </md-toolbar>
 
     <md-content data-ui-view data-autoscroll data-md-scroll-y layout="column" flex>
