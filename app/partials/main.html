@@ -5,7 +5,7 @@
         <a data-ui-sref="main" class="logo">
             <img src="images/logo.png" alt=""/>
 
-            <h1>Working Room</h1>
+            <h1>WorkingRoom</h1>
         </a>
         <md-divider></md-divider>
     </header>
@@ -13,7 +13,7 @@
     <md-content>
         <md-list layout="column">
             <md-list-item>
-                <span>Modules</span>
+                <span>{{ 'SIDENAV_MODULES' | translate }}</span>
             </md-list-item>
             <md-list-item data-ng-repeat="module in vm.modules">
                 <md-button data-ui-sref="main.modules({id: module.$id})" data-ui-sref-active="active">{{module.name}}
@@ -27,19 +27,19 @@
             <md-list-item>
                 <md-button class="black" data-ui-sref="main.users({id: vm.user.$id})" data-ui-sref-active="active">
                     <md-icon>person</md-icon>
-                    Profil
+                    {{ 'SIDENAV_PROFILE' | translate }}
                 </md-button>
             </md-list-item>
             <md-list-item data-ng-if="vm.user.type === 'admin'">
                 <md-button class="black" data-ui-sref="main.admin" data-ui-sref-active="active">
                     <md-icon>settings</md-icon>
-                    Administration
+                    {{ 'SIDENAV_ADMIN' | translate }}
                 </md-button>
             </md-list-item>
             <md-list-item>
                 <md-button class="black" data-ng-click="vm.unauth()" href="">
                     <md-icon>exit_to_app</md-icon>
-                    Déconnexion
+                    {{ 'SIDENAV_LOGOUT' | translate }}
                 </md-button>
             </md-list-item>
         </md-list>

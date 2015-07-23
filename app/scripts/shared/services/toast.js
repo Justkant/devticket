@@ -11,19 +11,19 @@ angular.module('workingRoom')
 
                 switch (error.code) {
                     case 'EMAIL_TAKEN':
-                        message = 'L\'e-mail spécifié est déjà utilisé';
+                        message = 'L\'e-mail est déjà utilisé';
                         break;
                     case 'INVALID_EMAIL':
-                        message = 'L\'e-mail de l\'utilisateur spécifié est invalide';
+                        message = 'L\'e-mail est invalide';
                         break;
                     case 'INVALID_PASSWORD':
-                        message = 'Le mot de passe de l\'utilisateur spécifié est invalide';
+                        message = 'Mauvais mot de passe';
                         break;
                     case 'INVALID_USER':
                         message = 'Ce compte n\'existe pas';
                         break;
                     case 'NETWORK_ERROR':
-                        message = 'Une erreur est survenue avec le serveur. Vérifiez votre connexion wifi.';
+                        message = 'Vérifiez votre connexion wifi';
                         break;
                     default:
                         message = 'Une erreur est survenue : ' + error.message;

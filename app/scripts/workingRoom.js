@@ -10,7 +10,8 @@ angular.module('workingRoom', [
     'ngResource',
     'ngMaterial',
     'ui.router',
-    'md.data.table'
+    'md.data.table',
+    'pascalprecht.translate'
 ]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
     $mdThemingProvider.definePalette('workingRoomPrimary', {
         "50": "#f2f2f2",
@@ -96,6 +97,9 @@ angular.module('workingRoom', [
                 },
                 UsersList: function (User, Users) {
                     return Users.all().$loaded();
+                },
+                admin: function(User) {
+                    return User.type === 'admin';
                 }
             }
         })
@@ -104,6 +108,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/modules.html',
             controller: 'ModulesCtrl as vm',
             resolve: {
+                admin: function (admin) {
+                    return admin;
+                },
                 User: function (User) {
                     return User;
                 },
@@ -140,13 +147,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/edit-modules.html',
             controller: 'EditModulesCtrl as vm',
             resolve: {
-                authorization: function(User, $q) {
+                admin: function(admin, $q) {
                     return $q(function (resolve, reject) {
-                        if (User.type === 'admin') {
-                            resolve(User.type);
-                        } else {
-                            reject(User.type);
-                        }
+                        admin ? resolve(admin) : reject(admin);
                     });
                 },
                 Module: function (Module) {
@@ -159,6 +162,11 @@ angular.module('workingRoom', [
             templateUrl: 'partials/users/user.html',
             controller: 'UserCtrl as vm',
             resolve: {
+                admin: function (User, $stateParams, admin, $q) {
+                    return $q(function (resolve) {
+                        resolve(User.$id === $stateParams.id || admin);
+                    });
+                },
                 user: function(Users, $stateParams) {
                     return Users.get($stateParams.id);
                 },
@@ -172,15 +180,17 @@ angular.module('workingRoom', [
             templateUrl: 'partials/users/edit-user.html',
             controller: 'EditUserCtrl as vm',
             resolve: {
-                user: function (User, user, $q) {
+                user: function (user, admin, $q) {
                     return $q(function (resolve, reject) {
-                        if (User.$id === user.$id || User.type === 'admin') {
+                        if (admin) {
                             resolve(user);
                         } else {
                             reject('NOT_AUTHORIZED');
                         }
                     });
-
+                },
+                User: function (User) {
+                    return User;
                 },
                 GroupsList: function (GroupsList) {
                     return GroupsList;
@@ -192,13 +202,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/admin/admin.html',
             controller: 'AdminCtrl as vm',
             resolve: {
-                authorization: function(User, $q) {
+                admin: function(admin, $q) {
                     return $q(function (resolve, reject) {
-                        if (User.type === 'admin') {
-                            resolve(User.type);
-                        } else {
-                            reject(User.type);
-                        }
+                        admin ? resolve(admin) : reject(admin);
                     });
                 }
             }

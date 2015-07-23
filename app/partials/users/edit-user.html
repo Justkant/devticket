@@ -2,12 +2,18 @@
     <md-card flex flex-gt-md="66">
         <md-card-content>
             <h3>Informations</h3>
-            <md-input-container class="md-icon-float">
-                <label>Nom</label>
-                <md-icon>person</md-icon>
-                <input data-ng-model="vm.user.name" type="text" title="Nom d'utilisateur">
-            </md-input-container>
-            <md-chips ng-model="vm.user.groups" md-autocomplete-snap md-require-match>
+            <div layout="row">
+                <md-input-container flex class="md-icon-float">
+                    <label>Nom</label>
+                    <md-icon>person</md-icon>
+                    <input data-ng-model="vm.user.name" type="text" title="Nom d'utilisateur">
+                </md-input-container>
+                <md-radio-group data-ng-show="vm.admin" data-ng-model="vm.user.type">
+                    <md-radio-button value="user">Utilisateur</md-radio-button>
+                    <md-radio-button value="admin">Administrateur</md-radio-button>
+                </md-radio-group>
+            </div>
+            <md-chips data-ng-model="vm.user.groups" data-md-autocomplete-snap data-md-require-match>
                 <md-autocomplete
                         data-md-search-text="vm.searchText"
                         data-md-items="item in vm.getMatches()"

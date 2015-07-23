@@ -1,18 +1,18 @@
 <md-dialog flex="66">
     <md-dialog-content layout="column" style="padding: 0;">
         <md-content>
-            <div flex layout="row" layout-wrap style="padding: 20px;">
-                <div flex="100" layout-padding>
-                    <h4>Sujet :</h4>
-                    <p>{{ vm.ticket.subject }}</p>
+            <div flex layout="row" layout-wrap style="padding: 20px;" layout-padding>
+                <div flex="100">
+                    <span class="md-subhead">Sujet :</span>
+                    <h5>{{ vm.ticket.subject }}</h5>
                 </div>
-                <div flex="50" layout-padding data-ng-repeat="(key, field) in vm.module.ticketFields">
-                    <h4>{{field.name}} :</h4>
-                    <p>{{ vm.ticket[key] }}</p>
+                <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
+                    <span class="md-subhead">{{field.name}} :</span>
+                    <h5>{{ vm.ticket[key] }}</h5>
                 </div>
-                <div flex="100" layout-padding>
-                    <h4>Description :</h4>
-                    <p>{{ vm.ticket.description }}</p>
+                <div flex="100">
+                    <span class="md-subhead">Description :</span>
+                    <h5 flex style="padding: 0 8px">{{ vm.ticket.description }}</h5>
                 </div>
             </div>
             <md-divider></md-divider>

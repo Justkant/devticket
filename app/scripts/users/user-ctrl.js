@@ -1,22 +1,20 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('UserCtrl', function ($mdDialog, user) {
+    .controller('UserCtrl', function ($mdDialog, user, admin, Users, GroupsList) {
         var vm = this;
 
-        vm.deleteProfile = deleteProfile;
+        vm.deleteUser = deleteUser;
         vm.user = user;
+        vm.admin = admin;
 
-        function deleteProfile(event) {
-            var confirm = $mdDialog.confirm()
-                .title('Attention')
-                .content('Voulez-vous vraiment supprimer cet utilisateur ?')
-                .ariaLabel('confirm delete')
-                .ok('Oui')
-                .cancel('Non')
-                .targetEvent(event);
-            $mdDialog.show(confirm).then(function () {
-                //Users.delete(user);
+        function deleteUser(event) {
+            $mdDialog.show({
+                controller: 'DeleteUserModal as vm',
+                templateUrl: 'users/delete-user-modal.html',
+                targetEvent: event
+            }).then(function (res) {
+                Users.delete(user, res);
             });
         }
     });

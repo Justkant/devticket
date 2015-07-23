@@ -7,19 +7,21 @@
             </md-card-content>
         </md-card>
     </div>
-    <md-fab-speed-dial class="fab md-scale" data-md-direction="up">
-        <md-fab-trigger>
-            <md-button aria-label="edit profile" data-ui-sref=".edit" class="md-fab accent">
-                <md-tooltip data-md-direction="left">Modifier le profil</md-tooltip>
-                <md-icon>edit</md-icon>
-            </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-            <md-button aria-label="group-settings" data-ng-click="vm.deleteProfile($event)"
-                       class="md-fab md-raised md-mini">
-                <md-tooltip data-md-direction="left">Suppression du profil</md-tooltip>
-                <md-icon style="color: #808080;">delete</md-icon>
-            </md-button>
-        </md-fab-actions>
-    </md-fab-speed-dial>
+    <div>
+        <md-fab-speed-dial class="fab md-scale" data-md-direction="up" data-ng-if="vm.admin">
+            <md-fab-trigger>
+                <md-button aria-label="edit profile" data-ui-sref=".edit" class="md-fab accent">
+                    <md-tooltip data-md-direction="left">Modifier le profil</md-tooltip>
+                    <md-icon>edit</md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="group-settings" data-ng-click="vm.deleteUser($event)"
+                           class="md-fab md-raised md-mini">
+                    <md-tooltip data-md-direction="left">Suppression du profil</md-tooltip>
+                    <md-icon style="color: #808080;">delete</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </div>
 </div>
