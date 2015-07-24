@@ -153,6 +153,9 @@ angular.module('workingRoom', [
                         User.type === 'admin' ? resolve(admin) : reject(admin);
                     });
                 },
+                TicketsList: function (TicketsList) {
+                    return TicketsList;
+                },
                 Module: function (Module) {
                     return Module;
                 }
