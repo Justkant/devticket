@@ -163,6 +163,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/users/user.html',
             controller: 'UserCtrl as vm',
             resolve: {
+                User: function (User) {
+                    return User;
+                },
                 admin: function (User, $stateParams, admin, $q) {
                     return $q(function (resolve) {
                         resolve(User.$id === $stateParams.id || admin);

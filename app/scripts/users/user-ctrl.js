@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('UserCtrl', function ($mdDialog, user, admin, Users, GroupsList) {
+    .controller('UserCtrl', function ($mdDialog, user, admin, User, Users, GroupsList) {
         var vm = this;
 
         vm.deleteUser = deleteUser;
@@ -19,7 +19,7 @@ angular.module('workingRoom')
                     }
                 }
             }).then(function (res) {
-                Users.delete(res, user);
+                Users.delete(res, user, User);
             });
         }
     });

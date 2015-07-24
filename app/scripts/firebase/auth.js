@@ -29,6 +29,11 @@
                 }
             });
 
+            auth.cancelSave = function () {
+                if (lastOnlineRef) lastOnlineRef.onDisconnect().cancel();
+                if (connectedRef) connectedRef.onDisconnect().cancel();
+            };
+
             return auth;
         });
 })();

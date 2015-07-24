@@ -89,9 +89,11 @@ angular.module('workingRoom')
                     });
                 });
             },
-            delete: function (obj, user) {
+            delete: function (obj, user, connectedUser) {
+                var auth = user.$id === connectedUser.$id;
                 return $q(function (resolve, reject) {
                     user.$remove().then(function () {
+                        if (auth) Auth.cancelSave();
                         Auth.$removeUser(obj).then(function () {
                             Toasts.simple('Utilisateur supprimé');
                             resolve();
