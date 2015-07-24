@@ -10,7 +10,7 @@
             <div flex>
             </div>
             <md-button class="md-accent" data-ng-click="vm.openCreateTicket($event)">
-                Créer un ticket
+            {{ 'TICKET_CREATE' | translate }}
             </md-button>
         </md-data-table-toolbar>
 
@@ -55,13 +55,17 @@
 <md-fab-speed-dial class="fab md-scale" data-md-direction="up">
     <md-fab-trigger>
         <md-button aria-label="search" data-ui-sref="main.modules.search({id: vm.moduleId})" class="md-fab accent">
-            <md-tooltip data-md-direction="left">Rechercher un ticket</md-tooltip>
+            <md-tooltip data-md-direction="left">
+              {{ 'TICKET_BUTTON_SEARCH' | translate }}
+            </md-tooltip>
             <md-icon>search</md-icon>
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
         <md-button aria-label="group-settings" data-ui-sref="main.modules.edit({id: vm.moduleId})" class="md-fab md-raised md-mini">
-            <md-tooltip data-md-direction="left">Edition du module</md-tooltip>
+            <md-tooltip data-md-direction="left">
+              {{ 'TICKET_BUTTON_EDIT' | translate }}
+            </md-tooltip>
             <md-icon style="color: #808080;">settings</md-icon>
         </md-button>
     </md-fab-actions>
