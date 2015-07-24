@@ -1,11 +1,27 @@
 'use strict';
 
 angular.module('workingRoom')
-    .factory('Tickets', function (Ref, $firebaseObject, $firebaseArray, $q) {
+    .factory('Tickets', function (Ref, $firebaseObject, $firebaseArray, $q, Auth) {
         var ref = Ref.child('tickets');
         var ticketsForModule = {};
         var tickets = null;
-        //var ticket = null;
+
+        Auth.$onAuth(function (user) {
+            if (!user) {
+                destroy();
+            }
+        });
+
+        function destroy() {
+            for (var moduleId in ticketsForModule) {
+                ticketsForModule[moduleId].$destroy();
+                ticketsForModule[moduleId] = null;
+            }
+            if (tickets) {
+                tickets.$destroy();
+                tickets = null;
+            }
+        }
 
         return {
             all: function () {
@@ -19,6 +35,15 @@ angular.module('workingRoom')
                     ticketsForModule[id] = $firebaseArray(ref.child(id));
                 }
                 return ticketsForModule[id];
+            },
+            getTicket: function (moduleId, ticketId) {
+                return $q(function (resolve, reject) {
+                    if (ticketsForModule[moduleId]) {
+                        resolve(ticketsForModule[moduleId].$getRecord(ticketId));
+                    } else {
+                        reject();
+                    }
+                });
             },
             add: function (id, obj) {
                 if (ticketsForModule[id]) {
@@ -36,20 +61,6 @@ angular.module('workingRoom')
             },
             delete: function (moduleId) {
                 ref.child(moduleId).remove();
-            },
-            getTicket: function (moduleId, ticketId) {
-                return $q(function (resolve, reject) {
-                    if (ticketsForModule[moduleId]) {
-                        resolve(ticketsForModule[moduleId].$getRecord(ticketId));
-                    }
-                    reject();
-                });
-            },
-            destroy: function () {
-                for (var moduleId in ticketsForModule) {
-                    ticketsForModule[moduleId].$destroy();
-                    ticketsForModule[moduleId] = null;
-                }
             }
         }
     });

@@ -10,9 +10,14 @@ angular.module('workingRoom')
 
         function deleteUser(event) {
             $mdDialog.show({
-                controller: 'DeleteUserModal as vm',
-                templateUrl: 'users/delete-user-modal.html',
-                targetEvent: event
+                controller: 'DeleteUserCtrl as vm',
+                templateUrl: 'partials/users/delete-user-modal.html',
+                targetEvent: event,
+                resolve: {
+                    email: function() {
+                        return user.email;
+                    }
+                }
             }).then(function (res) {
                 Users.delete(res, user);
             });

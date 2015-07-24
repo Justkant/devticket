@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('MainCtrl', function ($rootScope, $state, $mdSidenav, $translate, amMoment, Auth, User, ModulesList, Users, Modules, Groups, Tickets) {
+    .controller('MainCtrl', function ($rootScope, $state, $mdSidenav, $translate, amMoment, Auth, User, ModulesList, Modules) {
         var vm = this;
 
+        vm.unauth = Auth.saveDisconnect;
         vm.currentState = $state.current.name;
         vm.toggleSidenav = toogleSidenav;
         vm.modules = ModulesList;
@@ -58,16 +59,6 @@ angular.module('workingRoom')
                 default:
                     vm.toolbarTitle = 'WorkingRoom';
             }
-
-            function logout() {
-                Groups.destroy();
-                Users.destroy();
-                Modules.destroy();
-                Tickets.destroy();
-                Auth.saveDisconnect();
-            }
-
-            vm.unauth = logout;
         }
 
         function changeLocale() {

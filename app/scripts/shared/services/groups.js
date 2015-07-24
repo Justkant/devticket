@@ -1,16 +1,25 @@
 'use strict';
 
 angular.module('workingRoom')
-    .factory('Groups', function (Ref, $firebaseObject, $firebaseArray) {
+    .factory('Groups', function (Ref, $firebaseObject, $firebaseArray, Auth) {
         var ref = Ref.child('groups');
-        //var groupsForUser = [];
         var groups = null;
-        var group = null;
+        var groupsList = {};
 
-        function destroyIfExist() {
-            if (group) {
-                group.$destroy();
-                group = null;
+        Auth.$onAuth(function (user) {
+            if (!user) {
+                destroy();
+            }
+        });
+
+        function destroy() {
+            for (var groupId in groupsList) {
+                groupsList[groupId].$destroy();
+                groupsList[groupId] = null;
+            }
+            if (groups) {
+                groups.$destroy();
+                groups = null;
             }
         }
 
@@ -22,25 +31,11 @@ angular.module('workingRoom')
                 return groups;
             },
             get: function (id) {
-                destroyIfExist();
-                group = $firebaseObject(ref.child(id));
-                return group;
-            },
-            /*getForUser: function (user) {
-                if (groupsForUser.length === 0) {
-                    var dfds = [];
-                    user.groups.forEach(function (group) {
-                        var obj = $firebaseObject(ref.child(group));
-                        groupsForUser.push(obj);
-                        dfds.push(obj.$loaded);
-                    });
-                    return $q.all(dfds);
-                } else {
-                    return $q(function (resolve) {
-                        resolve(groupsForUser);
-                    });
+                if (!groupsList[id]) {
+                    groupsList[id] = $firebaseObject(ref.child(id));
                 }
-            },*/
+                return groupsList[id].$loaded();
+            },
             add: function (group) {
                 return groups.$add(group);
             },
@@ -49,13 +44,6 @@ angular.module('workingRoom')
             },
             delete: function (item) {
                 return groups.$remove(item);
-            },
-            destroy: function () {
-                destroyIfExist();
-                if (groups) {
-                    groups.$destroy();
-                    groups = null;
-                }
             }
         }
     });
