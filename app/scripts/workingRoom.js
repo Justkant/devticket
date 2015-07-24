@@ -148,7 +148,7 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/edit-modules.html',
             controller: 'EditModulesCtrl as vm',
             resolve: {
-                admin: function(User, $q) {
+                admin: function(User, $q, admin) {
                     return $q(function (resolve, reject) {
                         User.type === 'admin' ? resolve(admin) : reject(admin);
                     });
@@ -206,9 +206,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/admin/admin.html',
             controller: 'AdminCtrl as vm',
             resolve: {
-                admin: function(admin, $q) {
+                admin: function(User, $q, admin) {
                     return $q(function (resolve, reject) {
-                        admin ? resolve(admin) : reject(admin);
+                        User.type === 'admin' ? resolve(admin) : reject(admin);
                     });
                 }
             }

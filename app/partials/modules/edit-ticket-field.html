@@ -1,12 +1,43 @@
-<md-dialog aria-label="Edit ticket field">
-    <form name="moduleForm" data-ng-submit="vm.saveField()">
+<md-dialog flex="50" aria-label="Edit ticket field">
+    <form name="fieldForm" data-ng-submit="vm.saveField()">
         <md-dialog-content>
-
+            <div layout="row">
+                <md-input-container style="margin-right: 15px;">
+                    <label>Nom</label>
+                    <input data-ng-model="vm.field.name" type="text" required title="field name"/>
+                </md-input-container>
+                <md-select data-ng-model="vm.field.type" aria-label="field type">
+                    <md-option value="text">Texte</md-option>
+                    <md-option value="checkbox">Checkbox</md-option>
+                    <md-option value="dropsimple">Dropdown simple</md-option>
+                    <md-option value="dropdouble">Dropdown double</md-option>
+                </md-select>
+            </div>
+            <div data-ng-switch="vm.field.type">
+                <div data-ng-switch-when="dropsimple">
+                    <md-chips data-ng-model="vm.field.data"
+                              data-md-on-append="vm.appendDouble($chip)">
+                        <md-chip-template>{{$chip.name}}</md-chip-template>
+                    </md-chips>
+                </div>
+                <div data-ng-switch-when="dropdouble">
+                    <md-chips data-ng-model="vm.field.data"
+                              data-md-on-append="vm.appendDouble($chip)">
+                        <md-chip-template>{{$chip.name}}</md-chip-template>
+                    </md-chips>
+                    <div data-ng-repeat="data in vm.field.data">
+                        <h5>{{data.name}}</h5>
+                        <md-chips data-ng-model="data.data"></md-chips>
+                    </div>
+                </div>
+            </div>
         </md-dialog-content>
+        <div class="md-actions">
+            <md-button data-ng-click="vm.deleteField($event)">Supprimer</md-button>
+            <md-button data-ng-click="vm.hide($event)">Fermer</md-button>
+            <md-button class="md-raised md-accent" type="submit" data-ng-disabled="fieldForm.$invalid">
+                Sauvegarder
+            </md-button>
+        </div>
     </form>
-    <div class="md-actions">
-        <md-button data-ng-click="vm.deleteField()">Supprimer</md-button>
-        <md-button data-ng-click="vm.hide()">Fermer</md-button>
-        <md-button class="md-raised md-accent" type="submit">Sauvegarder</md-button>
-    </div>
 </md-dialog>

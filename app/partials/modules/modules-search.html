@@ -1,33 +1,51 @@
 <md-card layout-padding>
-    <md-content layout-padding layout="row" layout-sm="column">
-        <md-input-container>
-            <label>Nom du module</label>
-            <input type="text" data-ng-model="vm.module.name" title="nom du module"/>
+    <md-content layout-padding layout="row" layout-wrap="" layout-sm="column">
+        <md-input-container flex="100">
+            <label>Sujet</label>
+            <input autofocus data-ng-model="vm.ticket.subject" type="text" required title="sujet"/>
         </md-input-container>
+        <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
+            <div data-ng-switch="field.type">
+                <md-input-container data-ng-switch-when="text">
+                    <label>{{field.name}}</label>
+                        <textarea data-ng-model="vm.ticket[key]" type="text"
+                                  columns="1" required title="{{field.name}}"></textarea>
+                </md-input-container>
+                <md-input-container data-ng-switch-when="checkbox">
+                    <md-checkbox ng-model="vm.ticket[key]" aria-label="{{field.name}}">
+                        <label>{{ field.name }}</label>
+                    </md-checkbox>
+                </md-input-container>
+                <md-input-container data-ng-switch-when="dropsimple">
+                    <label>{{field.name}}</label>
+                    <md-select data-ng-model="vm.ticket[key]" required>
+                        <md-option data-ng-repeat="data in field.data" value="{{data.name}}">{{data.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <div flex layout="row" data-ng-switch-when="dropdouble">
+                    <md-input-container flex>
+                        <label>{{field.name}}</label>
+                        <md-select data-ng-model="vm.ticket[key].first" aria-label="cat">
+                            <md-option data-ng-repeat="data in field.data" value="{{data.name}}">
+                                {{data.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex data-ng-show="vm.ticket[key].first">
+                        <md-select data-ng-model="vm.ticket[key].second" aria-label="subcat">
+                            <md-option data-ng-repeat="subdata in vm.getSubCat(vm.ticket[key].first, field.data)"
+                                       value="{{subdata}}">{{subdata}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
     </md-content>
     <md-divider></md-divider>
-    <form name="newFieldForm" data-ng-submit="vm.addTicketField()"
-          layout-padding layout="row" layout-sm="column" layout-align="start center">
-        <md-input-container>
-            <label>Nom du nouveau champ pour les tickets</label>
-            <input type="text" data-ng-model="vm.newTicketField" title="Champ pour les tickets" required/>
-        </md-input-container>
-        <md-button type="submit" data-ng-disabled="newFieldForm.$invalid" class="md-icon-button md-accent">
-            <md-icon>add</md-icon>
-        </md-button>
-    </form>
-    <md-divider></md-divider>
-    <div layout="row" layout-wrap layout-padding>
-        <md-card flex="20" data-ng-repeat="field in vm.module.ticketFields"
-                 data-ng-click="vm.openEditTicketField($event, field)">
-            <md-card-content>
-                <h4>{{ field.name }}</h4>
-            </md-card-content>
-        </md-card>
-    </div>
-    <md-divider data-ng-show="vm.module.ticketFields.length > 0"></md-divider>
     <div class="md-actions" layout="row" layout-align="end center">
-        <md-button class="md-accent" data-ui-sref="main.modules({id: vm.moduleId})">Fermer</md-button>
-        <md-button class="md-accent md-raised" data-ng-click="vm.saveModule()">Sauvegarder</md-button>
+        <md-button class="md-accent" data-ui-sref="^">Fermer</md-button>
+        <md-button class="md-accent md-raised" data-ng-click="vm.searchTickets()">Rechercher</md-button>
     </div>
 </md-card>

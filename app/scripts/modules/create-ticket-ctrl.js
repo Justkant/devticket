@@ -14,4 +14,17 @@ angular.module('workingRoom')
 
         vm.cancel = $mdDialog.cancel;
         vm.hide = $mdDialog.hide;
+
+        vm.getSubCat = function (cat, subcats) {
+            var ret = [];
+            if (cat) {
+                for (var i = 0, len = subcats.length; i < len; i++) {
+                    if (subcats[i].name === cat) {
+                        ret = subcats[i].data;
+                        break;
+                    }
+                }
+            }
+            return ret;
+        };
     });

@@ -18,6 +18,7 @@ angular.module('workingRoom')
             if (vm.newTicketField.length > 0) {
                 vm.module.ticketFields.push({
                     name: vm.newTicketField,
+                    data: [],
                     required: true,
                     showInTable: true
                 });

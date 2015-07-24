@@ -38,7 +38,12 @@
                     <td style="text-align:center">{{ticket.created | date}}</td>
                     <td style="text-align:center">{{ticket.lastResponse}}</td>
                     <td data-ng-repeat="(key, field) in vm.module.ticketFields"  style="text-align:center">
-                        {{ticket[key]}}
+                        <div data-ng-if="field.type !== 'dropdouble'">
+                            {{ticket[key]}}
+                        </div>
+                        <div data-ng-if="field.type === 'dropdouble'">
+                            {{ticket[key].first + ' - ' + ticket[key].second}}
+                        </div>
                     </td>
                 </tr>
                 </tbody>

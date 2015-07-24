@@ -18,7 +18,8 @@
     </form>
     <md-divider></md-divider>
     <div layout="row" layout-wrap layout-padding>
-        <md-card flex="20" data-ng-repeat="field in vm.module.ticketFields"
+        <md-card flex="15" data-ng-repeat="field in vm.module.ticketFields"
+                 style="cursor:pointer;"
                  data-ng-click="vm.openEditTicketField($event, field)">
             <md-card-content>
                 <h4>{{ field.name }}</h4>

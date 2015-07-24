@@ -5,4 +5,5 @@ angular.module('workingRoom')
         var vm = this;
 
         vm.moduleId = Module.$id;
+        vm.module = Module;
     });

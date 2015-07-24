@@ -8,7 +8,8 @@
                 </div>
                 <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
                     <span class="md-subhead">{{field.name}} :</span>
-                    <h5>{{ vm.ticket[key] }}</h5>
+                    <h5 data-ng-if="field.type !== 'dropdouble'">{{ vm.ticket[key] }}</h5>
+                    <h5 data-ng-if="field.type === 'dropdouble'">{{ vm.ticket[key].first + ' - ' + vm.ticket[key].second }}</h5>
                 </div>
                 <div flex="100">
                     <span class="md-subhead">Description :</span>
