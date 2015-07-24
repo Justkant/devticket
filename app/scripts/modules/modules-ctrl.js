@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module) {
+    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module, admin) {
         var vm = this;
 
         vm.moduleId = $stateParams.id;
         vm.module = Module;
         vm.openCreateTicket = openCreateTicket;
         vm.openTicketView = openTicketView;
+        vm.admin = admin;
 
         vm.filter = 'Tickets à traiter';
         vm.filters = [

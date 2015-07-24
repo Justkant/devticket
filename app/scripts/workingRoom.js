@@ -109,11 +109,11 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/modules.html',
             controller: 'ModulesCtrl as vm',
             resolve: {
-                admin: function (admin) {
-                    return admin;
-                },
                 User: function (User) {
                     return User;
+                },
+                admin: function(User) {
+                    return User.type === 'admin';
                 },
                 Module: function ($stateParams, Modules) {
                     return Modules.get($stateParams.id);
@@ -148,9 +148,9 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/edit-modules.html',
             controller: 'EditModulesCtrl as vm',
             resolve: {
-                admin: function(admin, $q) {
+                admin: function(User, $q) {
                     return $q(function (resolve, reject) {
-                        admin ? resolve(admin) : reject(admin);
+                        User.type === 'admin' ? resolve(admin) : reject(admin);
                     });
                 },
                 Module: function (Module) {
@@ -168,7 +168,7 @@ angular.module('workingRoom', [
                 },
                 admin: function (User, $stateParams, admin, $q) {
                     return $q(function (resolve) {
-                        resolve(User.$id === $stateParams.id || admin);
+                        resolve(User.$id === $stateParams.id || User.type === 'admin');
                     });
                 },
                 user: function(Users, $stateParams) {
