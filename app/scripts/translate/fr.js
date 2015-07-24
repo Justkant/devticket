@@ -15,7 +15,7 @@ angular.module('workingRoom')
             TICKET_TABLE_CREATED: 'Date de Création',
             TICKET_TABLE_LAST_REPLY: 'Dernière Réponse Par',
             TICKET_CREATE: 'Créer un ticket',
-            TICKET_TABLE_SEARCH: 'Rechercher un ticket',
+            TICKET_BUTTON_SEARCH: 'Rechercher un ticket',
             TICKET_BUTTON_EDIT: "Edition du module"
         }).useSanitizeValueStrategy('escape').preferredLanguage('fr');
     });
