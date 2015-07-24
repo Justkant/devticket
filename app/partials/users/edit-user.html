@@ -2,6 +2,7 @@
     <md-card flex flex-gt-md="66">
         <md-card-content>
             <h3>Informations</h3>
+
             <div layout="row">
                 <md-input-container flex class="md-icon-float">
                     <label>Nom</label>
@@ -28,6 +29,14 @@
                 </md-chip-template>
             </md-chips>
         </md-card-content>
+        <div layout="row" layout-align="end">
+            <md-button data-ng-click="vm.changeEmail($event)" class="md-accent md-raised">
+                Changer l'email
+            </md-button>
+            <md-button data-ng-click="vm.changePassword($event)" class="md-accent md-raised">
+                Changer le mot de passe
+            </md-button>
+        </div>
     </md-card>
 </div>
 <md-fab-speed-dial class="fab md-scale" data-md-direction="up">

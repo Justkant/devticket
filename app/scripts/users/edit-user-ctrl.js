@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('EditUserCtrl', function (user, GroupsList, $state, Toasts, User) {
+    .controller('EditUserCtrl', function (user, GroupsList, $mdDialog, $state, Toasts, User, Users) {
         var vm = this;
 
         vm.user = {
@@ -15,6 +15,8 @@ angular.module('workingRoom')
         vm.getMatches = getMatches;
         vm.saveUser = saveUser;
         vm.admin = User.type === 'admin';
+        vm.changeEmail = changeEmail;
+        vm.changePassword = changePassword;
 
         GroupsList.forEach(function (group) {
             group._lowername = group.name.toLowerCase();
@@ -33,12 +35,34 @@ angular.module('workingRoom')
             });
         }
 
-        function changePassword() {
-
+        function changePassword(event) {
+            $mdDialog.show({
+                controller: 'ChangePasswordCtrl as vm',
+                templateUrl: 'partials/users/change-password-modal.html',
+                targetEvent: event,
+                resolve: {
+                    email: function() {
+                        return user.email;
+                    }
+                }
+            }).then(function (res) {
+                Users.changePassword(res);
+            });
         }
 
         function changeEmail() {
-
+            $mdDialog.show({
+                controller: 'ChangeEmailCtrl as vm',
+                templateUrl: 'partials/users/change-email-modal.html',
+                targetEvent: event,
+                resolve: {
+                    email: function() {
+                        return user.email;
+                    }
+                }
+            }).then(function (res) {
+                Users.changeEmail(res, user);
+            });
         }
 
         function getMatches() {

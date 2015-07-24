@@ -47,8 +47,45 @@ angular.module('workingRoom')
                 });
                 return def.promise;
             },
-            delete: function () {
-
+            changePassword: function (obj) {
+                return Auth.$changePassword(obj).then(function () {
+                    Toasts.simple('Mot de passe changé');
+                }, function (error) {
+                    Toasts.error(error);
+                });
+            },
+            changeEmail: function (obj, user) {
+                return $q(function(resolve, reject) {
+                    Auth.$changeEmail(obj).then(function () {
+                        user.email = obj.newEmail;
+                        user.$save().then(function () {
+                            Toasts.simple('Email changé');
+                            resolve();
+                        }, function (error) {
+                            Toasts.error(error);
+                            reject();
+                        });
+                    }, function (error) {
+                        Toasts.error(error);
+                        reject();
+                    });
+                });
+            },
+            delete: function (obj, user) {
+                return $q(function (resolve, reject) {
+                    user.$remove().then(function () {
+                        Auth.$removeUser(obj).then(function () {
+                            Toasts.simple('Utilisateur supprimé');
+                            resolve();
+                        }, function (error) {
+                            Toasts.error(error);
+                            reject();
+                        });
+                    }, function (error) {
+                        Toasts.error(error);
+                        reject();
+                    })
+                })
             },
             destroy: function () {
                 for (var userId in usersList) {

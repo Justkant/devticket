@@ -14,7 +14,7 @@ angular.module('workingRoom')
                 templateUrl: 'users/delete-user-modal.html',
                 targetEvent: event
             }).then(function (res) {
-                Users.delete(user, res);
+                Users.delete(res, user);
             });
         }
     });
