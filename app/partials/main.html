@@ -68,14 +68,12 @@
 
     <md-content data-ui-view data-autoscroll data-md-scroll-y layout="column" flex>
 
-        <md-grid-list data-ng-if="vm.showModulesGrid" data-md-row-height="400px" data-md-gutter="8px" data-md-cols="1"
-                      data-md-cols-gt-md="2" flex layout-margin>
+        <md-grid-list data-ng-if="vm.showModulesGrid" data-md-row-height="300px" data-md-gutter="8px" data-md-cols="1"
+                      data-md-cols-gt-md="3" flex layout-margin>
             <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
                 <md-card layout-fill>
                     <md-card-content flex>
                         <h2 class="md-title">{{ module.name}}</h2>
-
-                        <p>Description...</p>
                     </md-card-content>
 
                     <div class="md-actions" layout="row" layout-align="end center">

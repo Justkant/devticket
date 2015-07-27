@@ -48,7 +48,7 @@ angular.module('workingRoom')
                             reject(error);
                         } else {
                             ref.child(userData.uid).set({
-                                id: userData.uid.split(':')[1],
+                                id: parseInt(userData.uid.split(':')[1], 10),
                                 email: user.email,
                                 name: user.name,
                                 type: user.type

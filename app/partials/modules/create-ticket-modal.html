@@ -13,7 +13,10 @@
                                   columns="1" required title="{{field.name}}"></textarea>
                     </md-input-container>
                     <md-input-container data-ng-switch-when="checkbox">
-                        <md-checkbox ng-model="vm.ticket[key]" aria-label="{{field.name}}">
+                        <md-checkbox data-ng-model="vm.ticket[key]"
+                                     data-ng-true-value="'oui'"
+                                     data-ng-false-value="'non'"
+                                     aria-label="{{field.name}}">
                             <label>{{ field.name }}</label>
                         </md-checkbox>
                     </md-input-container>
