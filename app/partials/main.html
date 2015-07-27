@@ -63,6 +63,12 @@
             <md-option value="en">English</md-option>
             <md-option value="es">Español</md-option>
             <md-option value="it">Italiano</md-option>
+            <md-option value="pl">Polski</md-option>
+            <md-option value="pt">Português</md-option>
+            <md-option value="de">Deutsch</md-option>
+            <md-option value="nl">Nederlands</md-option>
+            <md-option value="be">Belgisch</md-option>
+
         </md-select>
     </md-toolbar>
 
@@ -77,8 +83,8 @@
                     </md-card-content>
 
                     <div class="md-actions" layout="row" layout-align="end center">
-                        <md-button class="md-accent">Statistiques</md-button>
-                        <md-button class="md-accent" data-ui-sref="main.modules({id: module.$id})">Tickets</md-button>
+                        <md-button class="md-accent">{{ 'HOME_PAGE_MODULES_STAT_CPM' | translate }}</md-button>
+                        <md-button class="md-accent" data-ui-sref="main.modules({id: module.$id})">{{ 'HOME_PAGE_MODULES_TICKETS_CPM' | translate }}</md-button>
                     </div>
                 </md-card>
             </md-grid-tile>
