@@ -3,7 +3,7 @@
         <md-dialog-content>
             <div layout="row">
                 <md-input-container style="margin-right: 15px;">
-                    <label>Nom</label>
+                    <label>{{'MODIFY_FIELDS_NAME' | translate}}</label>
                     <input data-ng-model="vm.field.name" type="text" required title="field name"/>
                 </md-input-container>
                 <md-select data-ng-model="vm.field.type" aria-label="field type">
@@ -33,10 +33,14 @@
             </div>
         </md-dialog-content>
         <div class="md-actions">
-            <md-button data-ng-click="vm.deleteField($event)">Supprimer</md-button>
-            <md-button data-ng-click="vm.hide($event)">Fermer</md-button>
+            <md-button data-ng-click="vm.deleteField($event)">
+              {{'MODIFY_FIELDS_BUTTON_DEL' | translate}}
+            </md-button>
+            <md-button data-ng-click="vm.hide($event)">
+              {{'MODIFY_FIELDS_BUTTON_CLOSE' | translate}}
+            </md-button>
             <md-button class="md-raised md-accent" type="submit" data-ng-disabled="fieldForm.$invalid">
-                Sauvegarder
+                {{'MODIFY_FIELDS_BUTTON_SAVE' | translate}}
             </md-button>
         </div>
     </form>

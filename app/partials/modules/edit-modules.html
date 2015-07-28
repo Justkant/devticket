@@ -1,7 +1,7 @@
 <md-card layout-padding>
     <md-content layout-padding layout="row" layout-sm="column">
         <md-input-container>
-            <label>Nom du module</label>
+            <label>{{'MODIFY_MODULE_NAME' | translate}}</label>
             <input type="text" data-ng-model="vm.module.name" title="nom du module"/>
         </md-input-container>
     </md-content>
@@ -9,7 +9,7 @@
     <form name="newFieldForm" data-ng-submit="vm.addTicketField()"
           layout-padding layout="row" layout-sm="column" layout-align="start center">
         <md-input-container>
-            <label>Nom du nouveau champ pour les tickets</label>
+            <label>{{'MODIFY_MODULE_FIELDS' | translate}}</label>
             <input type="text" data-ng-model="vm.newTicketField" title="Champ pour les tickets" required/>
         </md-input-container>
         <md-button type="submit" data-ng-disabled="newFieldForm.$invalid" class="md-icon-button md-accent">
@@ -28,7 +28,7 @@
     </div>
     <md-divider data-ng-show="vm.module.ticketFields.length > 0"></md-divider>
     <div class="md-actions" layout="row" layout-align="end center">
-        <md-button class="md-accent" data-ui-sref="main.modules({id: vm.moduleId})">Fermer</md-button>
-        <md-button class="md-accent md-raised" data-ng-click="vm.saveModule()">Sauvegarder</md-button>
+        <md-button class="md-accent" data-ui-sref="main.modules({id: vm.moduleId})">{{'MODIFY_MODULE_BUTTON_CLOSE' | translate}}</md-button>
+        <md-button class="md-accent md-raised" data-ng-click="vm.saveModule()">{{'MODIFY_MODULE_BUTTON_SAVE' | translate}}</md-button>
     </div>
 </md-card>

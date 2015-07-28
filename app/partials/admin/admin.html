@@ -1,101 +1,108 @@
 <md-tabs flex md-border-bottom data-md-stretch-tabs="always" data-md-selected="vm.currentTab">
-    <md-tab label="Modules">
-        <md-content>
-            <md-grid-list flex layout-margin data-md-row-height="300px" data-md-gutter="8px"
-                          data-md-cols="1" data-md-cols-gt-md="3">
-                <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
-                    <md-card layout-fill>
-                        <md-card-content flex>
-                            <h2 class="md-title">{{ module.name}}</h2>
-                        </md-card-content>
+  <md-tab label="{{'ADMIN_MODULE_TAB' | translate}}">
+    <md-content>
+      <md-grid-list flex layout-margin data-md-row-height="300px" data-md-gutter="8px"
+      data-md-cols="1" data-md-cols-gt-md="3">
+      <md-grid-tile data-ng-repeat="module in vm.modules" data-md-rowspan="1" data-md-colspan="1">
+        <md-card layout-fill>
+          <md-card-content flex>
+            <h2 class="md-title">{{ module.name}}</h2>
+          </md-card-content>
 
-                        <div class="md-actions" layout="row" layout-align="end center">
-                            <md-button class="md-accent" data-ng-click="vm.openDeleteModule($event, module)">Supprimer</md-button>
-                            <md-button class="md-accent" data-ui-sref="main.modules.edit({id: module.$id})">Modifier
-                            </md-button>
-                        </div>
-                    </md-card>
-                </md-grid-tile>
-            </md-grid-list>
-        </md-content>
-    </md-tab>
-    <md-tab label="Groupes">
-        <md-content>
-            <md-grid-list flex layout-margin data-md-row-height="200px" data-md-gutter="8px"
-                          data-md-cols="2" data-md-cols-gt-md="4">
-                <md-grid-tile data-ng-repeat="group in vm.groups" data-md-rowspan="1" data-md-colspan="1">
-                    <md-card layout-fill>
-                        <md-card-content flex>
-                            <h2 class="md-title">{{ group.name}}</h2>
-                        </md-card-content>
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button class="md-accent" data-ng-click="vm.openDeleteModule($event, module)">
+              {{'ADMIN_MODULE_CPM_DEL' | translate}}
+            </md-button>
+            <md-button class="md-accent" data-ui-sref="main.modules.edit({id: module.$id})">
+              {{'ADMIN_MODULE_CPM_MODIFY' | translate}}
+            </md-button>
+          </div>
+        </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-content>
+</md-tab>
+<md-tab label="{{'ADMIN_GROUPS_TAB' | translate}}">
+  <md-content>
+    <md-grid-list flex layout-margin data-md-row-height="200px" data-md-gutter="8px"
+    data-md-cols="2" data-md-cols-gt-md="4">
+    <md-grid-tile data-ng-repeat="group in vm.groups" data-md-rowspan="1" data-md-colspan="1">
+      <md-card layout-fill>
+        <md-card-content flex>
+          <h2 class="md-title">{{ group.name}}</h2>
+        </md-card-content>
 
-                        <div class="md-actions" layout="row" layout-align="end center">
-                            <md-button class="md-accent" data-ng-click="vm.openDeleteGroup($event, group)">Supprimer</md-button>
-                            <md-button class="md-accent" data-ng-click="vm.openEditGroup($event, group)">Modifier</md-button>
-                        </div>
-                    </md-card>
-                </md-grid-tile>
-            </md-grid-list>
-        </md-content>
-    </md-tab>
-    <md-tab label="Utilisateurs">
-        <md-content>
-            <md-card>
-                <md-data-table-container>
-                    <table md-data-table>
-                        <thead md-order="vm.query.order">
-                        <tr>
-                            <th order-by="id">#</th>
-                            <th order-by="name">Nom</th>
-                            <th order-by="email">Email</th>
-                            <th order-by="type">Type</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="user in vm.users | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
-                            data-ui-sref="main.users({id: user.$id})">
-                            <td>{{user.id}}</td>
-                            <td>{{user.name}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.type}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </md-data-table-container>
+        <div class="md-actions" layout="row" layout-align="end center">
+          <md-button class="md-accent" data-ng-click="vm.openDeleteGroup($event, group)">
+            {{'ADMIN_GROUPS_BUTTON_DEL' | translate}}
+          </md-button>
+          <md-button class="md-accent" data-ng-click="vm.openEditGroup($event, group)">
+            {{'ADMIN_GROUPS_BUTTON_MODIFY' | translate}}
+          </md-button>
+        </div>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</md-content>
+</md-tab>
+<md-tab label="{{'ADMIN_USERS_TAB' | translate}}">
+  <md-content>
+    <md-card>
+      <md-data-table-container>
+        <table md-data-table>
+          <thead md-order="vm.query.order">
+            <tr>
+              <th order-by="id">#</th>
+              <th order-by="name">Nom</th>
+              <th order-by="email">Email</th>
+              <th order-by="type">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in vm.users | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
+            data-ui-sref="main.users({id: user.$id})">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.type}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-data-table-container>
 
-                <md-data-table-toolbar layout-align="end" fix-bottom update-func="vm">
-                    <md-data-table-pagination md-label="vm.label" md-limit="vm.query.limit" md-page="vm.query.page"
-                                              md-row-select="vm.query.rowSelect" md-total="{{vm.users.length}}">
-                    </md-data-table-pagination>
-                </md-data-table-toolbar>
-            </md-card>
-        </md-content>
-    </md-tab>
+    <md-data-table-toolbar layout-align="end" fix-bottom update-func="vm">
+      <md-data-table-pagination md-label="vm.label" md-limit="vm.query.limit" md-page="vm.query.page"
+      md-row-select="vm.query.rowSelect" md-total="{{vm.users.length}}">
+    </md-data-table-pagination>
+  </md-data-table-toolbar>
+</md-card>
+</md-content>
+</md-tab>
 </md-tabs>
 
 <div data-ng-switch="vm.currentTab">
-    <md-fab-speed-dial data-ng-switch-when="0" class="fab md-scale" data-md-direction="up">
-        <md-fab-trigger>
-            <md-button aria-label="add" data-ng-click="vm.openCreateModule($event)" class="md-fab accent">
-                <md-tooltip data-md-direction="left">Créer un module</md-tooltip>
-                <md-icon>playlist_add</md-icon>
-            </md-button>
-        </md-fab-trigger>
-    </md-fab-speed-dial>
-    <md-fab-speed-dial data-ng-switch-when="1" class="fab md-scale" data-md-direction="up">
-        <md-fab-trigger>
-            <md-button aria-label="add" data-ng-click="vm.openCreateGroup($event)" class="md-fab accent">
-                <md-tooltip data-md-direction="left">Créer un groupe</md-tooltip>
-                <md-icon>group_add</md-icon>
-            </md-button>
-        </md-fab-trigger>
-    </md-fab-speed-dial>
-    <md-fab-speed-dial data-ng-switch-when="2" class="fab md-scale" data-md-direction="up">
-        <md-fab-trigger>
-            <md-button aria-label="add" data-ng-click="vm.openCreateUser($event)" class="md-fab accent">
-                <md-tooltip data-md-direction="left">Créer un utilisateur</md-tooltip>
-                <md-icon>person_add</md-icon>
-            </md-button>
-        </md-fab-trigger>
-    </md-fab-speed-dial>
+  <md-fab-speed-dial data-ng-switch-when="0" class="fab md-scale" data-md-direction="up">
+    <md-fab-trigger>
+      <md-button aria-label="add" data-ng-click="vm.openCreateModule($event)" class="md-fab accent">
+        <md-tooltip data-md-direction="left">{{'ADMIN_MODULES_BUTTON_CREATE' | translate}}</md-tooltip>
+        <md-icon>playlist_add</md-icon>
+      </md-button>
+    </md-fab-trigger>
+  </md-fab-speed-dial>
+  <md-fab-speed-dial data-ng-switch-when="1" class="fab md-scale" data-md-direction="up">
+    <md-fab-trigger>
+      <md-button aria-label="add" data-ng-click="vm.openCreateGroup($event)" class="md-fab accent">
+        <md-tooltip data-md-direction="left">{{'ADMIN_GROUPS_BUTTON_CREATE' | translate}}</md-tooltip>
+        <md-icon>group_add</md-icon>
+      </md-button>
+    </md-fab-trigger>
+  </md-fab-speed-dial>
+  <md-fab-speed-dial data-ng-switch-when="2" class="fab md-scale" data-md-direction="up">
+    <md-fab-trigger>
+      <md-button aria-label="add" data-ng-click="vm.openCreateUser($event)" class="md-fab accent">
+        <md-tooltip data-md-direction="left">{{'ADMIN_USERS_BUTTON_CREATE' | translate}}</md-tooltip>
+        <md-icon>person_add</md-icon>
+      </md-button>
+    </md-fab-trigger>
+  </md-fab-speed-dial>
 </div>

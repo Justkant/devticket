@@ -1,17 +1,17 @@
 <div layout="row" layout-margin layout-fill>
     <md-card flex flex-gt-md="66">
         <md-card-content>
-            <h3>Informations</h3>
+            <h3>{{'MODAL_EDIT_PROFILE_INFOS' | translate}}</h3>
 
             <div layout="row">
                 <md-input-container flex class="md-icon-float">
-                    <label>Nom</label>
+                    <label>{{'EDIT_PROFIL_NAME' | translate}}</label>
                     <md-icon>person</md-icon>
                     <input data-ng-model="vm.user.name" type="text" title="Nom d'utilisateur">
                 </md-input-container>
                 <md-radio-group data-ng-show="vm.admin" data-ng-model="vm.user.type">
-                    <md-radio-button value="user">Utilisateur</md-radio-button>
-                    <md-radio-button value="admin">Administrateur</md-radio-button>
+                    <md-radio-button value="user">{{'EDIT_PROFIL_USER' | translate}}</md-radio-button>
+                    <md-radio-button value="admin">{{'EDIT_PROFIL_ADMIN' | translate}}</md-radio-button>
                 </md-radio-group>
             </div>
             <md-chips data-ng-model="vm.user.groups" data-md-autocomplete-snap data-md-require-match>
@@ -19,7 +19,7 @@
                         data-md-search-text="vm.searchText"
                         data-md-items="item in vm.getMatches()"
                         data-md-item-text="item.name"
-                        placeholder="Ajouter un groupe">
+                        placeholder="{{'EDIT_PROFIL_GROUPS' | translate}}">
                     <md-item-template>
                         <span data-md-highlight-text="vm.searchText">{{item.name}}</span>
                     </md-item-template>
@@ -31,10 +31,10 @@
         </md-card-content>
         <div layout="row" layout-align="end">
             <md-button data-ng-click="vm.changeEmail($event)" class="md-accent md-raised">
-                Changer l'email
+                {{'EDIT_PROFIL_MAIL' | translate}}
             </md-button>
             <md-button data-ng-click="vm.changePassword($event)" class="md-accent md-raised">
-                Changer le mot de passe
+                {{'EDIT_PROFIL_PWD' | translate}}
             </md-button>
         </div>
     </md-card>
@@ -42,13 +42,13 @@
 <md-fab-speed-dial class="fab md-scale" data-md-direction="up">
     <md-fab-trigger>
         <md-button aria-label="save edid" data-ng-click="vm.saveUser()" class="md-fab accent">
-            <md-tooltip data-md-direction="left">Enregistrer</md-tooltip>
+            <md-tooltip data-md-direction="left">{{'EDIT_PROFIL_SAVE' | translate}}</md-tooltip>
             <md-icon>done</md-icon>
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
         <md-button aria-label="cancel edit" data-ui-sref="^" class="md-fab md-raised md-mini">
-            <md-tooltip data-md-direction="left">Annuler</md-tooltip>
+            <md-tooltip data-md-direction="left">{{'EDIT_PROFIL_CANCEL' | translate}}</md-tooltip>
             <md-icon style="color: #808080;">clear</md-icon>
         </md-button>
     </md-fab-actions>
