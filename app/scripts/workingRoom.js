@@ -123,13 +123,16 @@ angular.module('workingRoom', [
                 }
             }
         })
-        .state('main.modules.stats', {
-            url: '/stats',
+        .state('main.modulesStats', {
+            url: 'modules/:id/stats',
             templateUrl: 'partials/modules/modules-stats.html',
             controller: 'ModulesStatsCtrl as vm',
             resolve: {
-                Module: function (Module) {
-                    return Module;
+                Module: function ($stateParams, Modules) {
+                    return Modules.get($stateParams.id);
+                },
+                TicketsList: function (Tickets, $stateParams) {
+                    return Tickets.get($stateParams.id);
                 }
             }
         })

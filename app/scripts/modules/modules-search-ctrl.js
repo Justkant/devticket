@@ -21,6 +21,12 @@ angular.module('workingRoom')
             return ret;
         };
 
+        vm.exportExcel = function() {
+            var str = convertToCsv($scope.$parent.vm.tickets);
+            var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, [Module.name + '_tickets.csv']);
+        };
+
         vm.back = function () {
             $scope.$parent.vm.tickets = TicketsList;
             $state.go('^');
@@ -29,4 +35,24 @@ angular.module('workingRoom')
         vm.searchTickets = function () {
             $scope.$parent.vm.tickets = $filter('filter')(TicketsList, vm.ticket);
         };
+
+        //TODO: finir la function afin de gerer les champs spéciaux comme les dropdowns ou autre
+        function convertToCsv(array) {
+            var str = '';
+
+            for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ',';
+
+                    if (array[i].hasOwnProperty(index)) {
+                        line += array[i][index];
+                    }
+                }
+
+                str += line + '\r\n';
+            }
+
+            return str;
+        }
     });
