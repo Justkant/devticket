@@ -50,7 +50,7 @@ angular.module('workingRoom')
             });
         }
 
-        function changeEmail() {
+        function changeEmail(event) {
             $mdDialog.show({
                 controller: 'ChangeEmailCtrl as vm',
                 templateUrl: 'partials/users/change-email-modal.html',

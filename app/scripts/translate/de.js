@@ -82,7 +82,7 @@ angular.module('workingRoom')
     USERS_PER_PAGE: 'Benutzer pro Seite',
     SEARCH_TICKETS_CLOSE: 'SCHLIESSEN',
     SEARCH_TICKETS: 'SUCHE',
-    VIEW_TICKET_MODAL_ANSWER: 'Schreiben Sie eine Antwort',
+    VIEW_TICKET_MODAL_ANSWER: 'Eine Antwort schreiben',
     VIEW_TICKET_MODAL_SEND: 'SENDEN',
     VIEW_TICKET_MODAL_CLOSE: 'SCHLIESSEN',
     DELETE_USER_MODAL_DELETE_ACCOUNT: 'Benutzerkonto löschen',

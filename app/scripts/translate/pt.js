@@ -78,7 +78,7 @@ angular.module('workingRoom')
     REQUIRED_FIELD: 'Este campo é obrigatório',
     INVALID_MAIL: 'Email inválido',
     TICKETS_PER_PAGE: 'Tickets por página',
-    SUR: 'dos',
+    SUR: 'sobre',
     USERS_PER_PAGE: 'Usuários por página',
     SEARCH_TICKETS_CLOSE: 'FECHAR',
     SEARCH_TICKETS: 'PESQUISA',
