@@ -64,10 +64,14 @@ angular.module('workingRoom')
     TICKET_BUTTON_SEARCH: "Search for a ticket",
     TICKET_BUTTON_EDIT: 'Edition of the module',
     MODAL_EDIT_PROFILE_INFOS: 'Informations',
-    MODAL_EDIT_PROFILE_MAIL: 'New email',
-    MODAL_EDIT_PROFILE_CONFIRM_MDP: 'Password',
-    MODAL_EDIT_PROFILE_LAST_MDP: 'Old password',
-    MODAL_EDIT_PROFILE_NEW_MDP: 'New password',
+    CHANGE_MAIL_MODAL_NEW: 'New email',
+    CHANGE_MAIL_MODAL_CONFIRM_MDP: 'Password',
+    CHANGE_MAIL_MODAL_CLOSE: 'CLOSE',
+    CHANGE_MAIL_MODAL_SAVE: 'SAVE',
+    CHANGE_PWD_MODAL_OLD: 'Old password',
+    CHANGE_PWD_MODAL_NEW: 'New password',
+    CHANGE_PWD_MODAL_CLOSE: 'CLOSE',
+    CHANGE_PWD_MODAL_SAVE: 'SAVE',
     MODAL_EDIT_GROUP_CLOSE: 'CLOSE',
     MODAL_EDIT_GROUP_SAVE: 'SAVE',
     MODAL_EDIT_GROUP_NAME: 'Name',
@@ -77,6 +81,13 @@ angular.module('workingRoom')
     SUR: 'out of',
     USERS_PER_PAGE: 'Users per page',
     SEARCH_TICKETS_CLOSE: 'CLOSE',
-    SEARCH_TICKETS: 'SEARCH'
+    SEARCH_TICKETS: 'SEARCH',
+    VIEW_TICKET_MODAL_ANSWER: 'Write an answer',
+    VIEW_TICKET_MODAL_SEND: 'SEND',
+    VIEW_TICKET_MODAL_CLOSE: 'CLOSE',
+    DELETE_USER_MODAL_DELETE_ACCOUNT: 'Delete the account',
+    DELETE_USER_MODAL_PWD: 'Password',
+    DELETE_USER_MODAL_CANCEL: 'CANCEL',
+    DELETE_USER_MODAL_BUTTON_DEL: 'DELETE'
   });
 });
