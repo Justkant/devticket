@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('EditTicketFieldCtrl', function ($scope, field, $mdDialog, Toasts) {
+    .controller('EditTicketFieldCtrl', function ($scope, field, $mdDialog) {
         var vm = this;
 
         vm.field = {
@@ -12,7 +12,6 @@ angular.module('workingRoom')
 
         vm.hide = hide;
         vm.saveField = saveField;
-        vm.deleteField = deleteField;
         vm.appendDouble = appendDouble;
 
         function appendDouble(chip) {
@@ -25,10 +24,6 @@ angular.module('workingRoom')
         function hide(event) {
             event.preventDefault();
             $mdDialog.hide();
-        }
-
-        function deleteField(event) {
-            event.preventDefault();
         }
 
         function saveField() {

@@ -1,12 +1,18 @@
 <md-dialog flex="66">
     <md-dialog-content layout="column" style="padding: 0;">
+        <md-toolbar class="md-accent">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>{{ vm.ticket.subject }}</span>
+                </h2>
+                <span flex></span>
+                <md-button aria-label="add" data-ng-click="vm.cancel()" class="md-icon-button">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
         <md-content>
             <div flex layout="row" layout-wrap style="padding: 20px;" layout-padding>
-                <div flex="100">
-                    <span class="md-subhead">Sujet :</span>
-                    <h5>{{ vm.ticket.subject }}</h5>
-                    <md-divider></md-divider>
-                </div>
                 <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
                     <span class="md-subhead">{{field.name}} :</span>
                     <h5 data-ng-if="field.type !== 'dropdouble'">{{ vm.ticket[key] }}</h5>

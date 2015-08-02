@@ -7,24 +7,23 @@ angular.module('workingRoom')
         vm.moduleId = Module.$id;
         vm.module = {
             name: Module.name,
-            ticketFields: Module.ticketFields || []
+            description: Module.description,
+            ticketFields: Module.ticketFields ? Module.ticketFields.slice(0) : []
         };
         vm.newTicketField = '';
         vm.saveModule = saveModule;
         vm.addTicketField = addTicketField;
         vm.openEditTicketField = openEditTicketField;
+        vm.openDeleteField = openDeleteField;
 
         function addTicketField() {
-            if (vm.newTicketField.length > 0) {
-                vm.module.ticketFields.push({
-                    name: vm.newTicketField,
-                    data: [],
-                    required: true,
-                    showInTable: true
-                });
-
-                vm.newTicketField = '';
-            }
+            $mdDialog.show({
+                controller: 'NewTicketFieldCtrl as vm',
+                templateUrl: 'partials/modules/new-ticket-field.html',
+                targetEvent: event
+            }).then(function (ticketField) {
+                vm.module.ticketFields.push(ticketField);
+            });
         }
 
         function openEditTicketField(event, field) {
@@ -40,9 +39,29 @@ angular.module('workingRoom')
             });
         }
 
+        function openDeleteField(event, key) {
+            event.stopPropagation();
+            var confirm = $mdDialog.confirm()
+                .title('Attention')
+                .content('Voulez-vous vraiment supprimer ce champ ?')
+                .ariaLabel('confirm delete')
+                .ok('Oui')
+                .cancel('Non')
+                .targetEvent(event);
+            $mdDialog.show(confirm).then(function () {
+                for (var i = 0; i < vm.module.ticketFields.length; i++) {
+                    if (i === key) {
+                        vm.module.ticketFields.splice(i, 1);
+                        break;
+                    }
+                }
+            });
+        }
+
         function saveModule() {
             if (vm.module.name.length > 0) {
                 Module.name = vm.module.name;
+                Module.description = vm.module.description;
                 Module.ticketFields = vm.module.ticketFields;
                 Module.$save().then(function () {
                     Toasts.simple('Sauvegarde réussie');

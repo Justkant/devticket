@@ -1,18 +1,35 @@
 <md-dialog flex="50">
-  <form name="groupForm" data-ng-submit="vm.hide(vm.group)">
-    <md-dialog-content>
-      <md-input-container flex>
-        <label>{{'MODAL_EDIT_GROUP_NAME' | translate}}</label>
-        <input autofocus data-ng-model="vm.group.name" type="text" required title="nom"/>
-      </md-input-container>
-    </md-dialog-content>
-    <div class="md-actions">
-      <md-button type="button" data-ng-click="vm.cancel()">
-        {{'MODAL_EDIT_GROUP_CLOSE' | translate}}
-      </md-button>
-      <md-button class="md-raised md-accent" type="submit" data-ng-disabled="userForm.$invalid">
-        {{'MODAL_EDIT_GROUP_SAVE' | translate}}
-      </md-button>
-    </div>
-  </form>
+    <form name="groupForm" data-ng-submit="vm.hide(vm.group)">
+        <md-dialog-content>
+            <md-input-container flex>
+                <label>{{'MODAL_EDIT_GROUP_NAME' | translate}}</label>
+                <input autofocus data-ng-model="vm.group.name" type="text" required title="nom"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Ajouter un module</label>
+                <md-select data-ng-model="vm.selectedModule" data-md-on-close="vm.addModule()">
+                    <md-option data-ng-repeat="module in vm.modules" value="{{$index}}">{{module.name}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-list data-ng-if="vm.group.modules.length > 0">
+                <md-subheader class="md-no-sticky">{{'ADMIN_GROUPS_BUTTON_MODIFY' | translate}}</md-subheader>
+                <md-list-item data-ng-repeat="module in vm.group.modules">
+                    <p> {{ module.name }} </p>
+                    <md-button class="md-icon-button" data-ng-click="vm.removeModule($index)">
+                        <md-tooltip data-md-direction="left">{{'ADMIN_GROUPS_BUTTON_DEL' | translate}}</md-tooltip>
+                        <md-icon>delete</md-icon>
+                    </md-button>
+
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button type="button" data-ng-click="vm.cancel()">
+                {{'MODAL_EDIT_GROUP_CLOSE' | translate}}
+            </md-button>
+            <md-button class="md-raised md-accent" type="submit" data-ng-disabled="userForm.$invalid">
+                {{'MODAL_EDIT_GROUP_SAVE' | translate}}
+            </md-button>
+        </div>
+    </form>
 </md-dialog>
