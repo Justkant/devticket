@@ -13,15 +13,14 @@
         </md-toolbar>
         <md-content>
             <div flex layout="row" layout-wrap style="padding: 20px;" layout-padding>
-                <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
-                    <span class="md-subhead">{{field.name}} :</span>
-                    <h5 data-ng-if="field.type !== 'dropdouble'">{{ vm.ticket[key] }}</h5>
-                    <h5 data-ng-if="field.type === 'dropdouble'">{{ vm.ticket[key].first + ' - ' + vm.ticket[key].second }}</h5>
-                    <md-divider></md-divider>
+                <div flex="33" data-ng-repeat="(key, field) in vm.module.ticketFields">
+                    <span>{{field.name}} :</span>
+                    <h4 data-ng-if="field.type !== 'dropdouble'">{{ vm.ticket[key] }}</h4>
+                    <h4 data-ng-if="field.type === 'dropdouble'">{{ vm.ticket[key].first + ' - ' + vm.ticket[key].second }}</h4>
                 </div>
                 <div flex="100">
-                    <span class="md-subhead">Description :</span>
-                    <h5 flex style="padding: 0 8px">{{ vm.ticket.description }}</h5>
+                    <span>Message :</span>
+                    <h4 flex style="padding: 0 8px">{{ vm.ticket.message }}</h4>
                 </div>
             </div>
             <md-divider></md-divider>
@@ -29,11 +28,10 @@
                 <md-list data-ng-show="vm.ticket.messages.length > 0">
                     <md-subheader class="md-no-sticky">{{ vm.ticket.messages.length }} réponse(s)</md-subheader>
                     <md-list-item class="md-3-line" ng-repeat="message in vm.ticket.messages" style="padding: 0; margin-left:16px;">
-                        <div class="md-list-item-text">
+                        <div class="md-list-item-text ticket-response">
                             <h3>{{ message.author.name }}</h3>
 
                             <p style="white-space: pre;">{{ message.content }}</p>
-                            <md-divider data-ng-if="!$last"></md-divider>
                         </div>
                     </md-list-item>
                 </md-list>

@@ -77,6 +77,15 @@ md-card {
   padding-left: 20px;
 }
 
+.ticket-response {
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  padding: 16px !important;
+  margin-bottom: 16px;
+  margin-right: 16px;
+  background-color: #ececec;
+}
+
 md-sidenav {
   border-right: 1px solid $grey;
   min-width: 250px !important;
