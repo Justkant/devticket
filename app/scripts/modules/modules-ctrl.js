@@ -32,23 +32,6 @@ angular.module('workingRoom')
 
         vm.tickets = TicketsList;
 
-        /*function Ticket(obj, i) {
-         this.id = i; //Math.round(Math.random() * 1000) + 1;
-         this.user = obj.user;
-         this.subject = obj.subject;
-         this.priority = obj.priority;
-         this.sale = obj.sale;
-         this.category = obj.category;
-         this.subCategory = obj.subCategory;
-         this.commandNb = Math.round(Math.random() * 1000) + 1;
-         this.saleNb = Math.round(Math.random() * 1000) + 1;
-         this.refSRP = Math.round(Math.random() * 1000) + 1;
-         this.created = obj.created;
-         this.status = obj.status;
-         this.salePrice = obj.salePrice;
-         this.lastResponse = obj.lastResponse;
-         }*/
-
         function openTicketView(event, id) {
             $mdDialog.show({
                 controller: 'ViewTicketCtrl as vm',

@@ -14,6 +14,7 @@ angular.module('workingRoom')
 
         vm.cancel = $mdDialog.cancel;
         vm.hide = $mdDialog.hide;
+        vm.upload = upload;
 
         vm.getSubCat = function (cat, subcats) {
             var ret = [];
@@ -27,4 +28,20 @@ angular.module('workingRoom')
             }
             return ret;
         };
+
+        function upload(file) {
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function(readerEvt) {
+                    var binaryString = readerEvt.target.result;
+                    vm.ticket.file = {
+                        name: file.name,
+                        data: 'data:' + file.type + ';base64,' + binaryString.substr(binaryString.indexOf('base64,') + 'base64,'.length)
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
     });

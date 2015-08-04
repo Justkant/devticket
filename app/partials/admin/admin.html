@@ -1,5 +1,5 @@
-<div layout="row">
-    <div flex="50">
+<div layout="row" layout-wrap>
+    <div flex="100" flex-gt-md="50">
         <md-card>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -18,11 +18,10 @@
                     <md-subheader class="md-no-sticky">{{'ADMIN_MODULE_CPM_MODIFY' | translate}}</md-subheader>
                     <md-list-item data-ng-repeat="module in vm.modules" ng-click="vm.goToModule(module)">
                         <p> {{ module.name }} </p>
-                        <md-button class="md-icon-button" data-ng-click="vm.openDeleteModule($event, module)">
+                        <div class="md-secondary" ng-click="vm.openDeleteModule($event, module)" aria-label="delete">
                             <md-tooltip data-md-direction="left">{{'ADMIN_MODULE_CPM_DEL' | translate}}</md-tooltip>
                             <md-icon>delete</md-icon>
-                        </md-button>
-
+                        </div>
                     </md-list-item>
                 </md-list>
             </md-card-content>
@@ -45,17 +44,16 @@
                     <md-subheader class="md-no-sticky">{{'ADMIN_GROUPS_BUTTON_MODIFY' | translate}}</md-subheader>
                     <md-list-item data-ng-repeat="group in vm.groups" ng-click="vm.openEditGroup($event, group)">
                         <p> {{ group.name }} </p>
-                        <md-button class="md-icon-button" data-ng-click="vm.openDeleteGroup($event, group)">
+                        <div class="md-secondary" ng-click="vm.openDeleteGroup($event, group)" aria-label="delete">
                             <md-tooltip data-md-direction="left">{{'ADMIN_GROUPS_BUTTON_DEL' | translate}}</md-tooltip>
                             <md-icon>delete</md-icon>
-                        </md-button>
-
+                        </div>
                     </md-list-item>
                 </md-list>
             </md-card-content>
         </md-card>
     </div>
-    <div flex="50">
+    <div flex="100" flex-gt-md="50">
         <md-card>
             <md-toolbar>
                 <div class="md-toolbar-tools">

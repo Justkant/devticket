@@ -12,8 +12,10 @@ angular.module('workingRoom', [
     'ui.router',
     'md.data.table',
     'pascalprecht.translate',
-    'angularMoment'
-]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    'angularMoment',
+    'ngFileUpload'
+]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|data):/);
     $mdThemingProvider.definePalette('workingRoomPrimary', {
         "50": "#f2f2f2",
         "100": "#d9d9d9",
@@ -34,20 +36,20 @@ angular.module('workingRoom', [
     });
 
     $mdThemingProvider.definePalette('workingRoomAccent', {
-        "50": "#fce7f8",
-        "100": "#f5b6e9",
-        "200": "#ee86da",
-        "300": "#e85dcd",
-        "400": "#e334c0",
-        "500": "#dd0cb4",
-        "600": "#c10b9e",
-        "700": "#a60987",
-        "800": "#8a0871",
-        "900": "#6f065a",
-        "A100": "#f5b6e9",
-        "A200": "#ee86da",
-        "A400": "#e334c0",
-        "A700": "#a60987",
+        "50":"#fcebf3",
+        "100":"#f7c3dc",
+        "200":"#f29bc4",
+        "300":"#ee79b0",
+        "400":"#e9579d",
+        "500":"#e53689",
+        "600":"#c82f78",
+        "700":"#ac2967",
+        "800":"#8f2256",
+        "900":"#731b45",
+        "A100":"#f7c3dc",
+        "A200":"#f29bc4",
+        "A400":"#e9579d",
+        "A700":"#ac2967",
         'contrastDefaultColor': 'light',
         'contrastDarkColors': ['50', '100', 'A100']
     });
@@ -177,7 +179,7 @@ angular.module('workingRoom', [
                         resolve(User.$id === $stateParams.id || User.type === 'admin');
                     });
                 },
-                user: function(Users, $stateParams) {
+                user: function(Users, $stateParams) {
                     return Users.get($stateParams.id);
                 },
                 GroupsList: function (GroupsList) {

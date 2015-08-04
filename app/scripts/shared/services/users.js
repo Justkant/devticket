@@ -92,11 +92,16 @@ angular.module('workingRoom')
             delete: function (obj, user, connectedUser) {
                 var auth = user.$id === connectedUser.$id;
                 return $q(function (resolve, reject) {
-                    user.$remove().then(function () {
-                        if (auth) Auth.cancelSave();
-                        Auth.$removeUser(obj).then(function () {
-                            Toasts.simple('Utilisateur supprimé');
-                            resolve();
+                    Auth.$authWithPassword(obj).then(function () {
+                        user.$remove().then(function () {
+                            if (auth) Auth.cancelSave();
+                            Auth.$removeUser(obj).then(function () {
+                                Toasts.simple('Utilisateur supprimé');
+                                resolve();
+                            }, function (error) {
+                                Toasts.error(error);
+                                reject();
+                            });
                         }, function (error) {
                             Toasts.error(error);
                             reject();
@@ -104,7 +109,7 @@ angular.module('workingRoom')
                     }, function (error) {
                         Toasts.error(error);
                         reject();
-                    })
+                    });
                 })
             }
         };

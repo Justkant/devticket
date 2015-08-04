@@ -7,7 +7,8 @@ angular.module('workingRoom')
         vm.moduleId = Module.$id;
         vm.module = {
             name: Module.name,
-            description: Module.description,
+            description: Module.description || '',
+            status: Module.status ? Module.status.splice(0) : [],
             ticketFields: Module.ticketFields ? Module.ticketFields.slice(0) : []
         };
         vm.newTicketField = '';
@@ -63,6 +64,7 @@ angular.module('workingRoom')
                 Module.name = vm.module.name;
                 Module.description = vm.module.description;
                 Module.ticketFields = vm.module.ticketFields;
+                Module.status = vm.module.status;
                 Module.$save().then(function () {
                     Toasts.simple('Sauvegarde réussie');
                     $state.go('^');
