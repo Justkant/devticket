@@ -1,16 +1,17 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets, module) {
+    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets, module, Toasts) {
         var vm = this;
 
         vm.module = module;
         vm.ticket = ticket;
         vm.newMessage = '';
         vm.newStatus = null;
-        vm.newFile = {};
+        vm.newFile = null;
         vm.sendMessage = sendMessage;
         vm.upload = upload;
+        vm.deleteFile = deleteFile;
 
         vm.cancel = $mdDialog.hide;
 
@@ -31,6 +32,11 @@ angular.module('workingRoom')
             }
         }
 
+        function deleteFile() {
+            vm.newFile = null;
+            Toasts.simple('Fichier supprimé');
+        }
+
         function upload(file) {
             if (file) {
                 var reader = new FileReader();
@@ -41,6 +47,7 @@ angular.module('workingRoom')
                         name: file.name,
                         data: 'data:' + file.type + ';base64,' + binaryString.substr(binaryString.indexOf('base64,') + 'base64,'.length)
                     };
+                    Toasts.simple('Fichier ajouté');
                 };
 
                 reader.readAsDataURL(file);

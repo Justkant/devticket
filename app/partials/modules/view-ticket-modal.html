@@ -6,7 +6,7 @@
                     <span>{{ vm.ticket.subject }} - {{vm.ticket.status}}</span>
                 </h2>
                 <span flex></span>
-                <md-button aria-label="add" data-ng-click="vm.cancel()" class="md-icon-button">
+                <md-button type="button" aria-label="add" data-ng-click="vm.cancel()" class="md-icon-button">
                     <md-icon>close</md-icon>
                 </md-button>
             </div>
@@ -43,24 +43,26 @@
         </md-content>
         <md-divider></md-divider>
     </md-dialog-content>
-    <div class="md-actions">
+    <form layout="row" class="md-actions" name="responseForm" data-ng-submit="vm.sendMessage()">
         <div flex>
             <md-input-container>
                 <label>{{'VIEW_TICKET_MODAL_ANSWER' | translate}}</label>
-                <textarea md-no-autogrow data-ng-model="vm.newMessage" type="text" columns="1" title="nouveau message"></textarea>
+                <textarea md-no-autogrow data-ng-model="vm.newMessage" type="text"
+                          columns="1" title="nouveau message" required></textarea>
             </md-input-container>
         </div>
         <md-input-container>
             <label>Statut</label>
-            <md-select data-ng-model="vm.newStatus">
+            <md-select data-ng-model="vm.newStatus" required>
                 <md-option data-ng-repeat="status in vm.module.status" value="{{status.name}}">
                     {{status.name}}
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-button class="md-raised" ngf-select ngf-change="vm.upload($file)">Fichier</md-button>
-        <md-button class="md-accent md-raised" data-ng-click="vm.sendMessage()">
+        <md-button class="md-raised" type="button" data-ng-if="!vm.newFile" ngf-select ngf-change="vm.upload($file)">Fichier</md-button>
+        <md-button class="md-raised" type="button" data-ng-if="vm.newFile" data-ng-click="vm.deleteFile()">Supprimer</md-button>
+        <md-button class="md-accent md-raised" type="submit" data-ng-disabled="responseForm.$invalid">
           {{'VIEW_TICKET_MODAL_SEND' | translate}}
         </md-button>
-    </div>
+    </form>
 </md-dialog>

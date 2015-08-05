@@ -7,6 +7,7 @@ angular.module('workingRoom')
         vm.field = {
             name: field.name,
             subName: field.subName,
+            minSize: field.minSize,
             type: field.type || 'text',
             data: field.data ? field.data.slice(0) : []
         };
@@ -29,7 +30,8 @@ angular.module('workingRoom')
 
         function saveField() {
             if (vm.field.name.length > 0) field.name = vm.field.name;
-            field.subName = vm.field.subName;
+            if (vm.field.subName) field.subName = vm.field.subName;
+            if (vm.field.minSize) field.minSize = vm.field.minSize;
             field.type = vm.field.type;
             field.data = vm.field.data;
             $mdDialog.hide(field);
