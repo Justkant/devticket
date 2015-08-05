@@ -8,7 +8,7 @@
                         {{filter}}
                     </md-option>
                 </md-select>
-                <md-select data-ng-show="vm.filter === 'Tickets par statut'" class="md-accent" ng-model="vm.status" aria-label="select status" data-md-on-close="vm.filterTickets()">
+                <md-select data-ng-if="vm.filter === 'Tickets par statut'" class="md-accent" ng-model="vm.status" aria-label="select status" data-md-on-close="vm.filterTickets()">
                     <md-option data-ng-repeat="status in vm.module.status" class="md-accent" value="{{status.name}}">
                         {{status.name}}
                     </md-option>

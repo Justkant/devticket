@@ -6,6 +6,10 @@
                     <label>{{'MODIFY_FIELDS_NAME' | translate}}</label>
                     <input data-ng-model="vm.field.name" type="text" required title="field name"/>
                 </md-input-container>
+                <md-input-container style="margin-right: 15px;" data-ng-show="vm.field.type === 'dropdouble'">
+                    <label>Second nom</label>
+                    <input data-ng-model="vm.field.subName" type="text" required title="field sub name"/>
+                </md-input-container>
                 <md-select data-ng-model="vm.field.type" aria-label="field type">
                     <md-option value="text">Texte</md-option>
                     <md-option value="checkbox">Checkbox</md-option>
