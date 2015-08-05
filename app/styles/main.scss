@@ -135,16 +135,28 @@ md-icon.md-dark {
   color: $dark-grey !important;
 }
 
+table[md-data-table]>thead:not([md-table-progress])>tr>th.trim>div {
+  left: 0 !important;
+  right: 5px !important;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+table[md-data-table]>thead:not([md-table-progress])>tr>th:hover.trim>div {
+  right: auto !important;
+  z-index: 2;
+}
+
 table[md-data-table][md-row-select] > tbody > tr > td:nth-child(n+3):nth-last-child(n+2),
 table[md-data-table][md-row-select] > tfoot > tr > td:nth-child(n+3):nth-last-child(n+2),
 table[md-data-table][md-row-select] > thead > tr > th:nth-child(n+3):nth-last-child(n+2) {
-  padding: 0;
+  padding: 0 !important;
 }
 
 table[md-data-table][md-row-select] > tbody > tr > td:nth-child(2),
 table[md-data-table][md-row-select] > tfoot > tr > td:nth-child(2),
 table[md-data-table][md-row-select] > thead > tr > th:nth-child(2) {
-  padding: 0;
+  padding: 0 !important;
 }
 
 table[md-data-table][md-row-select] > tbody > tr > td:first-child,
@@ -156,5 +168,5 @@ table[md-data-table][md-row-select] > thead > tr > th:first-child {
 table[md-data-table]:not([md-row-select]) > tbody > tr > td:nth-child(n+2):nth-last-child(n+2),
 table[md-data-table]:not([md-row-select]) > tfoot > tr > td:nth-child(n+2):nth-last-child(n+2),
 table[md-data-table]:not([md-row-select]) > thead > tr > th:nth-child(n+2):nth-last-child(n+2) {
-  padding: 0;
+  padding: 0 !important;
 }

@@ -4,11 +4,13 @@ angular.module('workingRoom')
     .controller('CreateTicketCtrl', function ($mdDialog, Module, User) {
         var vm = this;
 
+        var defaultStatus = getDefaultStatus();
         vm.ticket = {
             user: {
                 id: User.$id,
                 name: User.name
-            }
+            },
+            status: defaultStatus
         };
         vm.module = Module;
 
@@ -28,6 +30,15 @@ angular.module('workingRoom')
             }
             return ret;
         };
+
+        function getDefaultStatus() {
+            for (var i = 0; i < Module.status.length; i++) {
+                if (Module.status.default) {
+                    return Module.status.name;
+                }
+            }
+            return Module.status[0] ? Module.status[0].name : 'A traiter';
+        }
 
         function upload(file) {
             if (file) {

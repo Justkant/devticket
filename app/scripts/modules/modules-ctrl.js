@@ -4,18 +4,20 @@ angular.module('workingRoom')
     .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module, admin) {
         var vm = this;
 
+        var defaultStatus = getDefaultStatus();
         vm.moduleId = $stateParams.id;
         vm.module = Module;
         vm.openCreateTicket = openCreateTicket;
         vm.openTicketView = openTicketView;
+        vm.filterTickets = filterTickets;
         vm.admin = admin;
 
+        vm.status = Module.status[0].name;
         vm.filter = 'Tickets à traiter';
         vm.filters = [
             'Tickets à traiter',
             'Tickets Non Lus',
-            'Tickets par statut',
-            'Tickets "A relancer"'
+            'Tickets par statut'
         ];
 
         vm.label = {
@@ -30,7 +32,36 @@ angular.module('workingRoom')
             rowSelect: [10, 20, 50, 100, 200, 500]
         };
 
-        vm.tickets = TicketsList;
+        vm.tickets = null;
+        TicketsList.$loaded().then(function () {
+            filterTickets();
+        });
+
+        function ticketToDeal(ticket) {
+            return ticket.status === defaultStatus;
+        }
+
+        function ticketNotRead(ticket) {
+            return !ticket.lastResponse;
+        }
+
+        function ticketByStatus(ticket) {
+            return ticket.status === vm.status;
+        }
+
+        function filterTickets() {
+            switch(vm.filter) {
+                case 'Tickets à traiter':
+                    vm.tickets = TicketsList.filter(ticketToDeal);
+                    break;
+                case 'Tickets Non Lus':
+                    vm.tickets = TicketsList.filter(ticketNotRead);
+                    break;
+                case 'Tickets par statut':
+                    vm.tickets = TicketsList.filter(ticketByStatus);
+                    break;
+            }
+        }
 
         function openTicketView(event, id) {
             $mdDialog.show({
@@ -72,4 +103,14 @@ angular.module('workingRoom')
                 });
             });
         }
+
+        function getDefaultStatus() {
+            for (var i = 0; i < Module.status.length; i++) {
+                if (Module.status.default) {
+                    return Module.status.name;
+                }
+            }
+            return Module.status[0] ? Module.status[0].name : 'A traiter';
+        }
+
     });

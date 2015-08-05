@@ -1,15 +1,26 @@
 <md-card layout-padding>
     <md-content layout-padding layout="row" layout-wrap="" layout-sm="column">
-        <md-input-container flex="100">
-            <label>Sujet</label>
-            <input autofocus data-ng-model="vm.ticket.subject" type="text" required title="sujet"/>
-        </md-input-container>
-        <div flex="50" data-ng-repeat="(key, field) in vm.module.ticketFields">
+        <div flex="33">
+            <md-input-container>
+                <label>Sujet</label>
+                <input autofocus data-ng-model="vm.ticket.subject" type="text" title="sujet"/>
+            </md-input-container>
+        </div>
+        <div flex="33">
+            <md-input-container>
+                <label>Status</label>
+                <md-select data-ng-model="vm.ticket.status">
+                    <md-option data-ng-repeat="data in vm.module.status" value="{{data.name}}">{{data.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex="33" data-ng-repeat="(key, field) in vm.module.ticketFields">
             <div data-ng-switch="field.type">
                 <md-input-container data-ng-switch-when="text">
                     <label>{{field.name}}</label>
                         <textarea data-ng-model="vm.ticket[key]" type="text"
-                                  columns="1" required title="{{field.name}}"></textarea>
+                                  columns="1" title="{{field.name}}"></textarea>
                 </md-input-container>
                 <md-input-container data-ng-switch-when="checkbox">
                     <md-checkbox ng-model="vm.ticket[key]" aria-label="{{field.name}}">
@@ -18,7 +29,7 @@
                 </md-input-container>
                 <md-input-container data-ng-switch-when="dropsimple">
                     <label>{{field.name}}</label>
-                    <md-select data-ng-model="vm.ticket[key]" required>
+                    <md-select data-ng-model="vm.ticket[key]">
                         <md-option data-ng-repeat="data in field.data" value="{{data.name}}">{{data.name}}
                         </md-option>
                     </md-select>

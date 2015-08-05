@@ -8,7 +8,7 @@ angular.module('workingRoom')
         vm.module = {
             name: Module.name,
             description: Module.description || '',
-            status: Module.status ? Module.status.splice(0) : [],
+            status: Module.status ? Module.status.slice(0) : [],
             ticketFields: Module.ticketFields ? Module.ticketFields.slice(0) : []
         };
         vm.newTicketField = '';
@@ -16,6 +16,7 @@ angular.module('workingRoom')
         vm.addTicketField = addTicketField;
         vm.openEditTicketField = openEditTicketField;
         vm.openDeleteField = openDeleteField;
+        vm.appendStatus = appendStatus;
 
         function addTicketField() {
             $mdDialog.show({
@@ -57,6 +58,14 @@ angular.module('workingRoom')
                     }
                 }
             });
+        }
+
+        function appendStatus(chip) {
+            return {
+                name: chip,
+                'default': false,
+                closing: false
+            };
         }
 
         function saveModule() {

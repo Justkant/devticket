@@ -7,6 +7,8 @@ angular.module('workingRoom')
         vm.ticket = {};
         vm.moduleId = Module.$id;
         vm.module = Module;
+        vm.searchTickets = searchTickets;
+        searchTickets();
 
         vm.getSubCat = function (cat, subcats) {
             var ret = [];
@@ -21,20 +23,20 @@ angular.module('workingRoom')
             return ret;
         };
 
-        vm.exportExcel = function() {
+        vm.exportExcel = function () {
             var str = convertToCsv($scope.$parent.vm.tickets);
             var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
             saveAs(blob, [Module.name + '_tickets.csv']);
         };
 
         vm.back = function () {
-            $scope.$parent.vm.tickets = TicketsList;
+            $scope.$parent.vm.filterTickets();
             $state.go('^');
         };
 
-        vm.searchTickets = function () {
+        function searchTickets() {
             $scope.$parent.vm.tickets = $filter('filter')(TicketsList, vm.ticket);
-        };
+        }
 
         //TODO: finir la function afin de gerer les champs spéciaux comme les dropdowns ou autre
         function convertToCsv(array) {

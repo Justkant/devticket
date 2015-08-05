@@ -44,14 +44,17 @@
         <md-divider></md-divider>
     </md-dialog-content>
     <div class="md-actions">
-        <md-input-container flex>
-            <label>{{'VIEW_TICKET_MODAL_ANSWER' | translate}}</label>
-            <textarea md-no-autogrow data-ng-model="vm.newMessage" type="text" columns="1" title="nouveau message"></textarea>
-        </md-input-container>
+        <div flex>
+            <md-input-container>
+                <label>{{'VIEW_TICKET_MODAL_ANSWER' | translate}}</label>
+                <textarea md-no-autogrow data-ng-model="vm.newMessage" type="text" columns="1" title="nouveau message"></textarea>
+            </md-input-container>
+        </div>
         <md-input-container>
             <label>Statut</label>
             <md-select data-ng-model="vm.newStatus">
-                <md-option data-ng-repeat="status in vm.module.status" value="{{status}}">{{status}}
+                <md-option data-ng-repeat="status in vm.module.status" value="{{status.name}}">
+                    {{status.name}}
                 </md-option>
             </md-select>
         </md-input-container>
