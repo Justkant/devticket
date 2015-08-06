@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('workingRoom')
-  .controller('CreateModuleCtrl', function($mdDialog) {
-    var vm = this;
+    .controller('CreateModuleCtrl', function ($mdDialog) {
+        var vm = this;
 
-    vm.module = {};
+        vm.module = {};
 
-    vm.cancel = $mdDialog.cancel;
-    vm.hide = $mdDialog.hide;
-  });
+        vm.cancel = $mdDialog.cancel;
+        vm.hide = $mdDialog.hide;
+    });

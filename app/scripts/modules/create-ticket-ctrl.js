@@ -39,12 +39,15 @@ angular.module('workingRoom')
         }
 
         function getDefaultStatus() {
-            for (var i = 0; i < Module.status.length; i++) {
-                if (Module.status.default) {
-                    return Module.status.name;
+            if (Module.status) {
+                for (var i = 0; i < Module.status.length; i++) {
+                    if (Module.status.default) {
+                        return Module.status.name;
+                    }
                 }
+                return Module.status[0] ? Module.status[0].name : 'A traiter';
             }
-            return Module.status[0] ? Module.status[0].name : 'A traiter';
+            return 'A traiter';
         }
 
         function deleteFile() {

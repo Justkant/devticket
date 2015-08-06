@@ -35,7 +35,7 @@ angular.module('workingRoom')
         };
 
         function searchTickets() {
-            $scope.$parent.vm.tickets = $filter('filter')(TicketsList, vm.ticket);
+            $scope.$parent.vm.currentFilter = vm.ticket;
         }
 
         //TODO: finir la function afin de gerer les champs spéciaux comme les dropdowns ou autre

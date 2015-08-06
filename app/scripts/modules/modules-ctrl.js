@@ -4,7 +4,6 @@ angular.module('workingRoom')
     .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module, admin) {
         var vm = this;
 
-        var defaultStatus = getDefaultStatus();
         vm.moduleId = $stateParams.id;
         vm.module = Module;
         vm.openCreateTicket = openCreateTicket;
@@ -12,12 +11,15 @@ angular.module('workingRoom')
         vm.filterTickets = filterTickets;
         vm.admin = admin;
 
-        vm.status = Module.status[0].name;
+        var defaultStatus = getDefaultStatus();
+        vm.currentFilter = {status: defaultStatus};
+        vm.status = defaultStatus;
         vm.filter = 'Tickets à traiter';
         vm.filters = [
             'Tickets à traiter',
             'Tickets Non Lus',
-            'Tickets par statut'
+            'Tickets par statut',
+            'Tous les tickets'
         ];
 
         vm.label = {
@@ -34,31 +36,22 @@ angular.module('workingRoom')
 
         vm.tickets = null;
         TicketsList.$loaded().then(function () {
-            filterTickets();
+            vm.tickets = TicketsList;
         });
-
-        function ticketToDeal(ticket) {
-            return ticket.status === defaultStatus;
-        }
-
-        function ticketNotRead(ticket) {
-            return !ticket.lastResponse;
-        }
-
-        function ticketByStatus(ticket) {
-            return ticket.status === vm.status;
-        }
 
         function filterTickets() {
             switch(vm.filter) {
                 case 'Tickets à traiter':
-                    vm.tickets = TicketsList.filter(ticketToDeal);
+                    vm.currentFilter = {status: defaultStatus};
                     break;
                 case 'Tickets Non Lus':
-                    vm.tickets = TicketsList.filter(ticketNotRead);
+                    vm.currentFilter = {lastResponse: '!'};
                     break;
                 case 'Tickets par statut':
-                    vm.tickets = TicketsList.filter(ticketByStatus);
+                    vm.currentFilter = {status: vm.status};
+                    break;
+                case 'Tous les tickets':
+                    vm.currentFilter = {};
                     break;
             }
         }
@@ -105,12 +98,15 @@ angular.module('workingRoom')
         }
 
         function getDefaultStatus() {
-            for (var i = 0; i < Module.status.length; i++) {
-                if (Module.status.default) {
-                    return Module.status.name;
+            if (Module.status) {
+                for (var i = 0; i < Module.status.length; i++) {
+                    if (Module.status.default) {
+                        return Module.status.name;
+                    }
                 }
+                return Module.status[0] ? Module.status[0].name : 'A traiter';
             }
-            return Module.status[0] ? Module.status[0].name : 'A traiter';
+            return 'A traiter';
         }
 
     });
