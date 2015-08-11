@@ -36,20 +36,20 @@ angular.module('workingRoom', [
     });
 
     $mdThemingProvider.definePalette('workingRoomAccent', {
-        "50":"#fcebf3",
-        "100":"#f7c3dc",
-        "200":"#f29bc4",
-        "300":"#ee79b0",
-        "400":"#e9579d",
-        "500":"#e53689",
-        "600":"#c82f78",
-        "700":"#ac2967",
-        "800":"#8f2256",
-        "900":"#731b45",
-        "A100":"#f7c3dc",
-        "A200":"#f29bc4",
-        "A400":"#e9579d",
-        "A700":"#ac2967",
+        "50": "#fcebf3",
+        "100": "#f7c3dc",
+        "200": "#f29bc4",
+        "300": "#ee79b0",
+        "400": "#e9579d",
+        "500": "#e53689",
+        "600": "#c82f78",
+        "700": "#ac2967",
+        "800": "#8f2256",
+        "900": "#731b45",
+        "A100": "#f7c3dc",
+        "A200": "#f29bc4",
+        "A400": "#e9579d",
+        "A700": "#ac2967",
         'contrastDefaultColor': 'light',
         'contrastDarkColors': ['50', '100', 'A100']
     });
@@ -93,15 +93,15 @@ angular.module('workingRoom', [
                     });
                 },
                 GroupsList: function (User, Groups) {
-                    return Groups.all().$loaded();
+                    return Groups.all(User);
                 },
-                ModulesList: function (User, Modules) {
-                    return Modules.all().$loaded();
+                ModulesList: function (User, Modules, GroupsList) {
+                    return Modules.all(User, GroupsList);
                 },
                 UsersList: function (User, Users) {
-                    return Users.all().$loaded();
+                    return Users.all(User);
                 },
-                admin: function(User) {
+                admin: function (User) {
                     return User.type === 'admin';
                 }
             }
@@ -114,10 +114,10 @@ angular.module('workingRoom', [
                 User: function (User) {
                     return User;
                 },
-                admin: function(User) {
+                admin: function (User) {
                     return User.type === 'admin';
                 },
-                Module: function ($stateParams, Modules) {
+                Module: function ($stateParams, Modules, GroupsList) {
                     return Modules.get($stateParams.id);
                 },
                 TicketsList: function (Tickets, $stateParams) {
@@ -130,6 +130,12 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/modules-stats.html',
             controller: 'ModulesStatsCtrl as vm',
             resolve: {
+                User: function (User) {
+                    return User;
+                },
+                admin: function (User) {
+                    return User.type === 'admin';
+                },
                 Module: function ($stateParams, Modules) {
                     return Modules.get($stateParams.id);
                 },
@@ -153,16 +159,16 @@ angular.module('workingRoom', [
             templateUrl: 'partials/modules/edit-modules.html',
             controller: 'EditModulesCtrl as vm',
             resolve: {
-                admin: function(User, $q, admin) {
+                Module: function (Module) {
+                    return Module;
+                },
+                admin: function (User, Module, $q, admin) {
                     return $q(function (resolve, reject) {
-                        User.type === 'admin' ? resolve(admin) : reject(admin);
+                        User.type === 'admin' || Module.$rights === 'a' ? resolve(admin) : reject(admin);
                     });
                 },
                 TicketsList: function (TicketsList) {
                     return TicketsList;
-                },
-                Module: function (Module) {
-                    return Module;
                 }
             }
         })
@@ -179,7 +185,7 @@ angular.module('workingRoom', [
                         resolve(User.$id === $stateParams.id || User.type === 'admin');
                     });
                 },
-                user: function(Users, $stateParams) {
+                user: function (Users, $stateParams) {
                     return Users.get($stateParams.id);
                 },
                 GroupsList: function (GroupsList) {
@@ -214,7 +220,7 @@ angular.module('workingRoom', [
             templateUrl: 'partials/admin/admin.html',
             controller: 'AdminCtrl as vm',
             resolve: {
-                admin: function(User, $q, admin) {
+                admin: function (User, $q, admin) {
                     return $q(function (resolve, reject) {
                         User.type === 'admin' ? resolve(admin) : reject(admin);
                     });

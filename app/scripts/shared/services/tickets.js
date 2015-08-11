@@ -28,7 +28,7 @@ angular.module('workingRoom')
                 if (!tickets) {
                     tickets = $firebaseArray(ref);
                 }
-                return tickets
+                return tickets;
             },
             get: function (id) {
                 if (!ticketsForModule[id]) {

@@ -3,12 +3,14 @@
     <div flex="100" data-ng-show="vm.tickets">
         <md-card>
             <md-data-table-toolbar>
-                <md-select class="md-accent" ng-model="vm.filter" aria-label="select filter" data-md-on-close="vm.filterTickets()">
+                <md-select class="md-accent" ng-model="vm.filter" aria-label="select filter"
+                           data-md-on-close="vm.filterTickets()">
                     <md-option data-ng-repeat="filter in vm.filters" class="md-accent" value="{{filter}}">
                         {{filter}}
                     </md-option>
                 </md-select>
-                <md-select data-ng-if="vm.filter === 'Tickets par statut'" class="md-accent" ng-model="vm.status" aria-label="select status" data-md-on-close="vm.filterTickets()">
+                <md-select data-ng-if="vm.filter === 'Tickets par statut'" class="md-accent" ng-model="vm.status"
+                           aria-label="select status" data-md-on-close="vm.filterTickets()">
                     <md-option data-ng-repeat="status in vm.module.status" class="md-accent" value="{{status.name}}">
                         {{status.name}}
                     </md-option>
@@ -18,7 +20,7 @@
                 <md-button class="md-accent" data-ui-sref="main.modulesStats({id: vm.module.$id})">
                     {{ 'HOME_PAGE_MODULES_STAT_CPM' | translate }}
                 </md-button>
-                <md-button class="md-accent" data-ng-click="vm.openCreateTicket($event)">
+                <md-button class="md-accent" data-ng-if="vm.admin || vm.module.$rights === 'w' || vm.module.$rights === 'a'" data-ng-click="vm.openCreateTicket($event)">
                     {{ 'TICKET_CREATE' | translate }}
                 </md-button>
             </md-data-table-toolbar>
@@ -39,7 +41,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="ticket in vm.tickets | filter:vm.currentFilter | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
+                    <tr ng-repeat="ticket in vm.tickets | orderBy:vm.query.order | limitTo:vm.query.limit:((vm.query.page - 1) * vm.query.limit)"
                         data-ng-click="vm.openTicketView($event, ticket.$id)">
                         <td style="text-align:center">{{ticket.id}}</td>
                         <td style="text-align:center">{{ticket.user.name}}</td>
@@ -60,7 +62,7 @@
                 </table>
             </md-data-table-container>
 
-            <md-data-table-toolbar layout-align="end" fix-bottom update-func="vm">
+            <md-data-table-toolbar layout-align="end">
                 <md-data-table-pagination md-label="vm.label" md-limit="vm.query.limit" md-page="vm.query.page"
                                           md-row-select="vm.query.rowSelect" md-total="{{vm.tickets.length}}">
                 </md-data-table-pagination>
@@ -80,7 +82,7 @@
             <md-icon>search</md-icon>
         </md-button>
     </md-fab-trigger>
-    <md-fab-actions data-ng-if="vm.admin">
+    <md-fab-actions data-ng-if="vm.admin || vm.module.$rights === 'a'">
         <md-button aria-label="group-settings" data-ui-sref="main.modules.edit({id: vm.moduleId})"
                    class="md-fab md-raised md-mini">
             <md-tooltip data-md-direction="left">

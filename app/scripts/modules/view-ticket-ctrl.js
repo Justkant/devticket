@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets, module, Toasts) {
+    .controller('ViewTicketCtrl', function ($state, $mdDialog, ticket, User, $stateParams, Tickets, module, Toasts, admin) {
         var vm = this;
 
         vm.module = module;
         vm.ticket = ticket;
+        vm.admin = admin;
         vm.newMessage = '';
         vm.newStatus = null;
         vm.newFile = null;

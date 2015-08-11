@@ -25,11 +25,15 @@ angular.module('workingRoom')
 
 
         return {
-            all: function () {
-                if (!users) {
-                    users = $firebaseArray(ref);
+            all: function (user) {
+                if (user.type === 'admin') {
+                    if (!users) {
+                        users = $firebaseArray(ref);
+                    }
+                    return users.$loaded();
+                } else {
+                    return [];
                 }
-                return users;
             },
             get: function (id) {
                 if (!usersList[id]) {

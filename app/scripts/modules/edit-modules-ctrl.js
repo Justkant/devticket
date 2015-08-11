@@ -18,7 +18,7 @@ angular.module('workingRoom')
         vm.openDeleteField = openDeleteField;
         vm.appendStatus = appendStatus;
 
-        function addTicketField() {
+        function addTicketField(event) {
             $mdDialog.show({
                 controller: 'NewTicketFieldCtrl as vm',
                 templateUrl: 'partials/modules/new-ticket-field.html',

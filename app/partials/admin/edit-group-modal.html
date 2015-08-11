@@ -12,15 +12,21 @@
                 </md-select>
             </md-input-container>
             <md-list data-ng-if="vm.group.modules.length > 0">
-                <md-subheader class="md-no-sticky">{{'ADMIN_GROUPS_BUTTON_MODIFY' | translate}}</md-subheader>
-                <md-list-item data-ng-repeat="module in vm.group.modules">
-                    <p> {{ module.name }} </p>
-                    <md-button class="md-icon-button" data-ng-click="vm.removeModule($index)">
-                        <md-tooltip data-md-direction="left">{{'ADMIN_GROUPS_BUTTON_DEL' | translate}}</md-tooltip>
-                        <md-icon>delete</md-icon>
-                    </md-button>
-
-                </md-list-item>
+                <md-subheader class="md-no-sticky">Modules sélectionnés</md-subheader>
+                <div layout="row" data-ng-repeat="module in vm.group.modules">
+                    <md-list-item flex>
+                        <p> {{ module.name }} </p>
+                        <md-button class="md-icon-button" data-ng-click="vm.removeModule($index)">
+                            <md-tooltip data-md-direction="left">{{'ADMIN_GROUPS_BUTTON_DEL' | translate}}</md-tooltip>
+                            <md-icon>delete</md-icon>
+                        </md-button>
+                    </md-list-item>
+                    <md-select data-ng-model="module.rights" flex="25" placeholder="Droits">
+                        <md-option value="r">Read</md-option>
+                        <md-option value="w">Write</md-option>
+                        <md-option value="a">Admin</md-option>
+                    </md-select>
+                </div>
             </md-list>
         </md-dialog-content>
         <div class="md-actions">

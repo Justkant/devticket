@@ -14,7 +14,7 @@
                     <md-radio-button value="admin">{{'EDIT_PROFIL_ADMIN' | translate}}</md-radio-button>
                 </md-radio-group>
             </div>
-            <md-chips data-ng-model="vm.user.groups" data-md-autocomplete-snap data-md-require-match>
+            <md-chips data-ng-if="vm.user.type === 'user'" readonly="!vm.admin" data-ng-model="vm.user.groups" data-md-autocomplete-snap data-md-require-match>
                 <md-autocomplete
                         data-md-search-text="vm.searchText"
                         data-md-items="item in vm.getMatches()"

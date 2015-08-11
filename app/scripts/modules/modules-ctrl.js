@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .controller('ModulesCtrl', function ($scope, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module, admin) {
+    .controller('ModulesCtrl', function ($scope, $filter, $timeout, TicketsList, Tickets, User, $stateParams, $mdDialog, Toasts, Module, admin) {
         var vm = this;
 
         vm.moduleId = $stateParams.id;
@@ -9,6 +9,7 @@ angular.module('workingRoom')
         vm.openCreateTicket = openCreateTicket;
         vm.openTicketView = openTicketView;
         vm.filterTickets = filterTickets;
+        vm.filterTicketList = filterTicketList;
         vm.admin = admin;
 
         var defaultStatus = getDefaultStatus();
@@ -36,8 +37,15 @@ angular.module('workingRoom')
 
         vm.tickets = null;
         TicketsList.$loaded().then(function () {
-            vm.tickets = TicketsList;
+            TicketsList.$watch(filterTicketList);
+            filterTicketList();
         });
+
+        function filterTicketList() {
+             $timeout(function () {
+                vm.tickets = $filter('filter')(TicketsList, vm.currentFilter);
+            });
+        }
 
         function filterTickets() {
             switch(vm.filter) {
@@ -54,6 +62,7 @@ angular.module('workingRoom')
                     vm.currentFilter = {};
                     break;
             }
+            filterTicketList();
         }
 
         function openTicketView(event, id) {
@@ -62,6 +71,9 @@ angular.module('workingRoom')
                 templateUrl: 'partials/modules/view-ticket-modal.html',
                 targetEvent: event,
                 resolve: {
+                    admin: function () {
+                        return admin;
+                    },
                     User: function () {
                         return User;
                     },

@@ -19,7 +19,8 @@ angular.module('workingRoom')
         vm.changePassword = changePassword;
 
         GroupsList.forEach(function (group) {
-            group._lowername = group.name.toLowerCase();
+            group.$lowername = group.name.toLowerCase();
+            group.id = group.$id;
         });
 
         function saveUser() {
@@ -70,6 +71,6 @@ angular.module('workingRoom')
         }
 
         function filterGroups(group) {
-            return group._lowername.indexOf(vm.searchText.toLowerCase()) === 0;
+            return group.$lowername.indexOf(vm.searchText.toLowerCase()) === 0;
         }
     });

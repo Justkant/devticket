@@ -43,7 +43,8 @@
         </md-content>
         <md-divider></md-divider>
     </md-dialog-content>
-    <form layout="row" class="md-actions" name="responseForm" data-ng-submit="vm.sendMessage()">
+    <form layout="row" class="md-actions" data-ng-if="vm.admin || vm.module.$rights === 'w' || vm.module.$rights === 'a'"
+          name="responseForm" data-ng-submit="vm.sendMessage()">
         <div flex>
             <md-input-container>
                 <label>{{'VIEW_TICKET_MODAL_ANSWER' | translate}}</label>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .factory('Modules', function (Ref, $firebaseObject, $firebaseArray, Auth) {
+    .factory('Modules', function ($q, Ref, $firebaseObject, $firebaseArray, Auth) {
         var ref = Ref.child('modules');
         var modulesList = {};
         var modules = null;
@@ -24,11 +24,36 @@ angular.module('workingRoom')
         }
 
         return {
-            all: function () {
-                if (!modules) {
-                    modules = $firebaseArray(ref);
+            all: function (user, groupsList) {
+                if (user.type === 'admin') {
+                    if (!modules) {
+                        modules = $firebaseArray(ref);
+                    }
+                    return modules.$loaded();
+                } else {
+                    var dfds = [];
+                    groupsList.forEach(function (g) {
+                        g.modules.forEach(function (m) {
+                            if (!modulesList[m.id]) {
+                                modulesList[m.id] = $firebaseObject(ref.child(m.id));
+                                modulesList[m.id].$rights = m.rights;
+                                dfds.push(modulesList[m.id].$loaded());
+                            } else if (modulesList[m.id].$rights !== m.rights) {
+                                switch (m.rights) {
+                                    case 'w':
+                                        if (modulesList[m.id].$rights === 'r') {
+                                            modulesList[m.id].$rights = 'w';
+                                        }
+                                        break;
+                                    case 'a':
+                                        modulesList[m.id].$rights = 'a';
+                                        break;
+                                }
+                            }
+                        });
+                    });
+                    return $q.all(dfds);
                 }
-                return modules;
             },
             get: function (id) {
                 if (!modulesList[id]) {
@@ -37,13 +62,13 @@ angular.module('workingRoom')
                 return modulesList[id].$loaded();
             },
             add: function (obj) {
-                return modules.$add(obj);
+                if (modules) return modules.$add(obj);
             },
             save: function (obj) {
-                return modules.save(obj);
+                if (modules) return modules.save(obj);
             },
             delete: function (item) {
-                return modules.$remove(item);
+                if (modules) return modules.$remove(item);
             }
         };
     });

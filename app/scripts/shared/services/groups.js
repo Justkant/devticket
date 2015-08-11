@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workingRoom')
-    .factory('Groups', function (Ref, $firebaseObject, $firebaseArray, Auth) {
+    .factory('Groups', function ($q, Ref, $firebaseObject, $firebaseArray, Auth) {
         var ref = Ref.child('groups');
         var groups = null;
         var groupsList = {};
@@ -24,11 +24,20 @@ angular.module('workingRoom')
         }
 
         return {
-            all: function () {
-                if (!groups) {
-                    groups = $firebaseArray(ref);
+            all: function (user) {
+                if (user.type === 'admin') {
+                    if (!groups) groups = $firebaseArray(ref);
+                    return groups.$loaded();
+                } else {
+                    var dfds = [];
+                    user.groups.forEach(function (g) {
+                        if (!groupsList[g.id]) {
+                            groupsList[g.id] = $firebaseObject(ref.child(g.id));
+                            dfds.push(groupsList[g.id].$loaded());
+                        }
+                    });
+                    return $q.all(dfds);
                 }
-                return groups;
             },
             get: function (id) {
                 if (!groupsList[id]) {
