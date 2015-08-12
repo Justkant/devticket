@@ -10,6 +10,24 @@ angular.module('workingRoom')
             vm.ticketsToDeal = TicketsList.filter(function (ticket) {
                 return ticket.status === 'A traiter';
             });
+            vm.ticketsDouble = TicketsList.filter(function (ticket) {
+                return ticket.status === 'Doublon';
+            });
+            vm.ticketsCurrent = TicketsList.filter(function (ticket) {
+                return ticket.status === 'En cours';
+            });
+            vm.ticketsClimb = TicketsList.filter(function (ticket) {
+                return ticket.status === 'Escaladé';
+            });
+            vm.ticketsDCNo = TicketsList.filter(function (ticket) {
+                return ticket.status === 'Traité sans résolution DC';
+            });
+            vm.ticketsDCYes = TicketsList.filter(function (ticket) {
+                return ticket.status === 'Traité avec résolution DC';
+            });
+            vm.ticketsNoCPM = TicketsList.filter(function (ticket) {
+                return ticket.status === 'Demande hors procédure CPM';
+            });
             vm.ticketsNotRead = TicketsList.filter(function (ticket) {
                 return !ticket.lastResponse;
             });

@@ -8,6 +8,24 @@
     <md-card style="height: 150px;" layout-padding layout-align="center center">
         <h3>Tickets non lus : {{vm.ticketsNotRead.length}}</h3>
     </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+        <h3>Tickets "En cours" : {{vm.ticketsCurrent.length}}</h3>
+    </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+        <h3>Doublons : {{vm.ticketsDouble.length}}</h3>
+    </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+        <h3>Tickets escaladé : {{vm.ticketsClimb.length}}</h3>
+    </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+      <h3>Traité avec résolution DC : {{vm.ticketsDCYes.length}}</h3>
+    </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+      <h3>Traité sans résolution DC : {{vm.ticketsDCNo.length}}</h3>
+    </md-card>
+    <md-card style="height: 150px;" layout-padding layout-align="center center">
+        <h3>Hors procédure CPM : {{vm.ticketsNoCPM.length}}</h3>
+    </md-card>
 </div>
 <div data-ng-hide="vm.tickets" layout-fill layout="row" layout-align="center" style="padding-top: 50px;">
     <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
