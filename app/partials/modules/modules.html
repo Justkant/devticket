@@ -20,7 +20,7 @@
                 <md-button class="md-accent" data-ui-sref="main.modulesStats({id: vm.module.$id})">
                     {{ 'HOME_PAGE_MODULES_STAT_CPM' | translate }}
                 </md-button>
-                <md-button class="md-accent" data-ng-if="vm.admin || vm.module.$rights === 'w' || vm.module.$rights === 'a'" data-ng-click="vm.openCreateTicket($event)">
+                <md-button class="md-accent" data-ng-if="vm.admin || vm.module.$rights === 'c' || vm.module.$rights === 'b' || vm.module.$rights === 'a'" data-ng-click="vm.openCreateTicket($event)">
                     {{ 'TICKET_CREATE' | translate }}
                 </md-button>
             </md-data-table-toolbar>

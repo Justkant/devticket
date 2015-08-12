@@ -40,9 +40,14 @@ angular.module('workingRoom')
                                 dfds.push(modulesList[m.id].$loaded());
                             } else if (modulesList[m.id].$rights !== m.rights) {
                                 switch (m.rights) {
-                                    case 'w':
+                                    case 'c':
                                         if (modulesList[m.id].$rights === 'r') {
-                                            modulesList[m.id].$rights = 'w';
+                                            modulesList[m.id].$rights = 'b';
+                                        }
+                                        break;
+                                    case 'r':
+                                        if (modulesList[m.id].$rights === 'c') {
+                                            modulesList[m.id].$rights = 'b';
                                         }
                                         break;
                                     case 'a':

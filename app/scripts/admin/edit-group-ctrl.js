@@ -9,6 +9,7 @@ angular.module('workingRoom')
             modules: Group.modules ? Group.modules.slice(0) : []
         };
 
+        //TODO: exclude selected modules from the vm.modules list
         vm.modules = ModulesList.slice(0);
         vm.hide = $mdDialog.hide;
         vm.cancel = $mdDialog.cancel;
