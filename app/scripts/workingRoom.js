@@ -13,7 +13,8 @@ angular.module('workingRoom', [
     'md.data.table',
     'pascalprecht.translate',
     'angularMoment',
-    'ngFileUpload'
+    'ngFileUpload',
+    'mp.datePicker'
 ]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|data):/);
     $mdThemingProvider.definePalette('workingRoomPrimary', {

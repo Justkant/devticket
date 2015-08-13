@@ -1,3 +1,12 @@
+<div>
+  <label>Date de début : </label>
+  <input type="text" ng-model="date">
+</div>
+<div style="display: block;">
+  <date-picker ng-model="date"></date-picker>
+  <label>Date de fin :</label>
+  <date-picker></date-picker>
+</div>
 <div layout="row" layout-padding data-ng-show="vm.tickets">
     <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
         <h3>Total de tickets :<br><br> {{vm.tickets.length}}</h3>
@@ -17,14 +26,14 @@
     <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
         <h3>Tickets escaladé :<br><br> {{vm.ticketsClimb.length}}</h3>
     </md-card>
+    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
+        <h3>Hors procédure CPM :<br><br> {{vm.ticketsNoCPM.length}}</h3>
+    </md-card>
     <md-card style="height: 350px; width: 350px; background-color: #FCC120;" layout-padding layout-align="center center">
       <h3>Traité avec résolution DC :<br><br> {{vm.ticketsDCYes.length}}</h3>
     </md-card>
     <md-card style="height: 350px; width: 350px; background-color: #FCC120;" layout-padding layout-align="center center">
       <h3>Traité sans résolution DC :<br><br> {{vm.ticketsDCNo.length}}</h3>
-    </md-card>
-    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
-        <h3>Hors procédure CPM :<br><br> {{vm.ticketsNoCPM.length}}</h3>
     </md-card>
 </div>
 <div data-ng-hide="vm.tickets" layout-fill layout="row" layout-align="center" style="padding-top: 50px;">
