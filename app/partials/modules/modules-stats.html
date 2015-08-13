@@ -1,30 +1,30 @@
 <div layout="row" layout-padding data-ng-show="vm.tickets">
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Total de tickets : {{vm.tickets.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
+        <h3>Total de tickets :<br><br> {{vm.tickets.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Tickets à traiter : {{vm.ticketsToDeal.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #56D9C9;" layout-padding layout-align="center center">
+        <h3>Tickets à traiter :<br><br> {{vm.ticketsToDeal.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Tickets non lus : {{vm.ticketsNotRead.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #3EC7F3;" layout-padding layout-align="center center">
+        <h3>Tickets non lus :<br><br> {{vm.ticketsNotRead.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Tickets "En cours" : {{vm.ticketsCurrent.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #3EC7F3;" layout-padding layout-align="center center">
+        <h3>Tickets "En cours" :<br><br> {{vm.ticketsCurrent.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Doublons : {{vm.ticketsDouble.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
+        <h3>Doublons : <br><br>{{vm.ticketsDouble.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Tickets escaladé : {{vm.ticketsClimb.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
+        <h3>Tickets escaladé :<br><br> {{vm.ticketsClimb.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-      <h3>Traité avec résolution DC : {{vm.ticketsDCYes.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #FCC120;" layout-padding layout-align="center center">
+      <h3>Traité avec résolution DC :<br><br> {{vm.ticketsDCYes.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-      <h3>Traité sans résolution DC : {{vm.ticketsDCNo.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #FCC120;" layout-padding layout-align="center center">
+      <h3>Traité sans résolution DC :<br><br> {{vm.ticketsDCNo.length}}</h3>
     </md-card>
-    <md-card style="height: 150px;" layout-padding layout-align="center center">
-        <h3>Hors procédure CPM : {{vm.ticketsNoCPM.length}}</h3>
+    <md-card style="height: 350px; width: 350px; background-color: #F36A3E;" layout-padding layout-align="center center">
+        <h3>Hors procédure CPM :<br><br> {{vm.ticketsNoCPM.length}}</h3>
     </md-card>
 </div>
 <div data-ng-hide="vm.tickets" layout-fill layout="row" layout-align="center" style="padding-top: 50px;">
